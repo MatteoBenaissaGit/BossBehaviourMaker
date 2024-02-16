@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
-    <Style src="NodeViewStyle.uss" />
+    <Style src="project://database/Assets/BossBehaviourMaker/Scripts/UIBuilder/BossBehaviourMakerEditor.uss?fileID=7433441132597879392&amp;guid=5f98c870b95461346808dbd4651a77cd&amp;type=3#BossBehaviourMakerEditor" />
     <ui:VisualElement name="node-state" />
     <ui:VisualElement name="node-border">
         <ui:VisualElement name="contents">

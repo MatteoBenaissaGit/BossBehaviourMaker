@@ -1,9 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
-    <Style src="project://database/Assets/BossBehaviourMaker/UIBuilder/BossBehaviourMakerEditor.uss?fileID=7433441132597879392&amp;guid=5f98c870b95461346808dbd4651a77cd&amp;type=3#BossBehaviourMakerEditor" />
-    <BossBehaviourMaker.Scripts.Editor.SplitViewBbm>
-        <ui:VisualElement name="LeftPanel" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
-        <ui:VisualElement name="RightPanel" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
-            <BossBehaviourMaker.Scripts.Editor.BossBehaviourMakerView focusable="true" name="BossBehaviourMakerView" />
-        </ui:VisualElement>
-    </BossBehaviourMaker.Scripts.Editor.SplitViewBbm>
-</ui:UXML>

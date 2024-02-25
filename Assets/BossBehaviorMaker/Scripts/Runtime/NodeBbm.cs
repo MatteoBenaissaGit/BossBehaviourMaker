@@ -11,7 +11,7 @@ namespace BossBehaviorMaker.Scripts.Runtime
             Failure = 2
         }
 
-        public int NodeID { get; set; }
+        public string Guid { get; set; }
         public NodeBbmState State { get; set; } = NodeBbmState.Running;
         
         [SerializeField] private bool _started;

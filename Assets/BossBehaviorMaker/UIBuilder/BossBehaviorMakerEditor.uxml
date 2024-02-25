@@ -1,9 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
-    <Style src="project://database/Assets/BossBehaviorMaker/UIBuilder/BossBehaviorMakerEditor.uss?fileID=7433441132597879392&amp;guid=5f98c870b95461346808dbd4651a77cd&amp;type=3#BossBehaviorMakerEditor" />
     <BossBehaviorMaker.Scripts.Editor.SplitViewBbm>
         <ui:VisualElement name="LeftPanel" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
         <ui:VisualElement name="RightPanel" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
-            <BossBehaviorMaker.Scripts.Editor.BossBehaviorMakerGraphView focusable="true">
+            <BossBehaviorMaker.Scripts.Editor.BossBehaviorMakerGraphView focusable="true" name="BehaviorTreeGraphView">
                 <ui:TextField picking-mode="Ignore" label="Tree Name" name="BehaviorTreeName" binding-path="m_Name" readonly="true" style="color: rgb(132, 132, 132);" />
             </BossBehaviorMaker.Scripts.Editor.BossBehaviorMakerGraphView>
         </ui:VisualElement>

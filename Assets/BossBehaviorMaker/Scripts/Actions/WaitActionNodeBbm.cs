@@ -8,7 +8,12 @@ namespace BossBehaviorMaker.Scripts.Actions
         public float Duration { get; set; } = 1f;
 
         private float _startTime;
-        
+
+        public override string ToString()
+        {
+            return "Wait";
+        }
+
         protected override void OnStart()
         {
             _startTime = Time.time;

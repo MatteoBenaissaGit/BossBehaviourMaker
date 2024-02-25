@@ -12,7 +12,12 @@ namespace BossBehaviorMaker.Scripts.Decorators
         public int NumberOfRepetitions { get; set; } = -1;
 
         private int _currentRepetitions;
-        
+
+        public override string ToString()
+        {
+            return "Repeat";
+        }
+
         protected override void OnStart()
         {
             _currentRepetitions = 0;

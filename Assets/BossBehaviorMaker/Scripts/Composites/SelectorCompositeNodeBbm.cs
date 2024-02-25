@@ -5,7 +5,12 @@ namespace BossBehaviorMaker.Scripts.Composites
     public class SelectorCompositeNodeBbm : CompositeNodeBbm
     {
         public int NodeToRun { get; set; } = 0;
-        
+
+        public override string ToString()
+        {
+            return "Selector";
+        }
+
         protected override void OnStart()
         {
         }

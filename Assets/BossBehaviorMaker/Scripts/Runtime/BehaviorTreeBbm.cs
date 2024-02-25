@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace BossBehaviorMaker.Scripts.Runtime
 {
@@ -7,6 +8,7 @@ namespace BossBehaviorMaker.Scripts.Runtime
     {
         public NodeBbm RootNode { get; set; }
         public NodeBbm.NodeBbmState TreeState { get; set; } = NodeBbm.NodeBbmState.Running;
+        public List<NodeBbm> Nodes { get; set; } = new List<NodeBbm>();
 
         public NodeBbm.NodeBbmState Update()
         {

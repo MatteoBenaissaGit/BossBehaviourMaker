@@ -7,6 +7,11 @@ namespace BossBehaviorMaker.Scripts.Composites
     {
         private int _current;
 
+        public override string ToString()
+        {
+            return "Sequencer";
+        }
+
         protected override void OnStart()
         {
             _current = 0;

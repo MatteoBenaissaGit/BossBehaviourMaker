@@ -14,6 +14,8 @@ namespace BossBehaviorMaker.Scripts.Runtime
         public string Guid { get; set; }
         public NodeBbmState State { get; set; } = NodeBbmState.Running;
         
+        public Vector2 NodeGraphPosition;
+        
         [SerializeField] private bool _started;
 
         /// <summary>

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5161911879363862442
+--- !u!114 &-5084194511403826239
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c000a6f096d44398bb08401705a8d4f, type: 3}
-  m_Name: DebugLogActionNodeBbm
+  m_Script: {fileID: 11500000, guid: 765d9ea596854d6e8960648f703be663, type: 3}
+  m_Name: SelectorCompositeNodeBbm
   m_EditorClassIdentifier: 
+  NodeGraphPosition: {x: 45.64, y: 124.96001}
   _started: 0
 --- !u!114 &11400000
 MonoBehaviour:
@@ -23,9 +24,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d6421cfed914d8d96adff46db098d29, type: 3}
-  m_Name: BehaviorTreeBbm
+  m_Name: BehaviourTreeBbm
   m_EditorClassIdentifier: 
---- !u!114 &3582964609066610580
+--- !u!114 &2280176800417114590
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -37,4 +38,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afdca235c85341149db7752f04ac9b09, type: 3}
   m_Name: RepeatDecoratorNodeBbm
   m_EditorClassIdentifier: 
+  NodeGraphPosition: {x: 187, y: 57.759995}
+  _started: 0
+--- !u!114 &7901490888319151189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c000a6f096d44398bb08401705a8d4f, type: 3}
+  m_Name: DebugLogActionNodeBbm
+  m_EditorClassIdentifier: 
+  NodeGraphPosition: {x: 0, y: 0}
   _started: 0

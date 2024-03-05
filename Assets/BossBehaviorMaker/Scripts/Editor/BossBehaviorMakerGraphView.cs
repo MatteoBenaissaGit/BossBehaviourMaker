@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using BossBehaviorMaker.Scripts.Decorators;
 using BossBehaviorMaker.Scripts.Runtime;
 using UnityEditor;
@@ -33,8 +34,34 @@ namespace BossBehaviorMaker.Scripts.Editor
         public void PopulateView(BehaviorTreeBbm behaviorTreeBbm)
         {
             _tree = behaviorTreeBbm;
+
+            graphViewChanged -= OnGraphViewChanged;
             DeleteElements(graphElements);
+            graphViewChanged += OnGraphViewChanged;
+
             _tree.Nodes.ForEach(CreateNodeView);
+        }
+
+        private GraphViewChange OnGraphViewChanged(GraphViewChange graphViewChange)
+        {
+            if (graphViewChange.elementsToRemove == null)
+            {
+                goto returnChanges;
+            }
+
+            foreach (GraphElement element in graphViewChange.elementsToRemove)
+            {
+                BossBehaviorMakerNodeView nodeView = element as BossBehaviorMakerNodeView;
+
+                if (nodeView == null)
+                {
+                    continue;
+                }
+                DeleteNode(nodeView.Node);
+            }
+            
+            returnChanges:
+            return graphViewChange;
         }
 
         private void CreateNodeView(NodeBbm node)
@@ -65,11 +92,29 @@ namespace BossBehaviorMaker.Scripts.Editor
             AssetDatabase.SaveAssets();
         }
 
-        public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
+        private void DeleteNode(NodeBbm node)
         {
             if (_hasTree == false)
             {
-                evt.menu.AppendAction($"No tree selected", null);
+                return;
+            }
+
+            _tree.Nodes.Remove(node);
+
+            if (_tree.RootNode == node)
+            {
+                _tree.RootNode = _tree.Nodes.FirstOrDefault();
+            }
+            
+            AssetDatabase.RemoveObjectFromAsset(node);
+            AssetDatabase.SaveAssets();
+        }
+
+        public override void BuildContextualMenu(ContextualMenuPopulateEvent menuEvent)
+        {
+            if (_hasTree == false)
+            {
+                menuEvent.menu.AppendAction($"No tree selected", null);
                 return;
             }
             
@@ -82,8 +127,10 @@ namespace BossBehaviorMaker.Scripts.Editor
                     continue;
                 }
 
-                evt.menu.AppendAction($"{type.BaseType.Name}/{type.Name}", _ => CreateNode(type));
+                menuEvent.menu.AppendAction($"{type.BaseType.Name}/{type.Name}", _ => CreateNode(type));
             }
+            
+            base.BuildContextualMenu(menuEvent);
         }
     }
 }

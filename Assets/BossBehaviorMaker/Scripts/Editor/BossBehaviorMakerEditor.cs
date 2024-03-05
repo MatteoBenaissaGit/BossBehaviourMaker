@@ -20,6 +20,11 @@ namespace BossBehaviorMaker.Scripts.Editor
             VisualTreeAsset visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(
                     "Assets/BossBehaviorMaker/UIBuilder/BossBehaviorMakerEditor.uxml");
             visualTree.CloneTree(rootVisualElement);
+
+            _treeView = rootVisualElement.Q<BossBehaviorMakerGraphView>();
+            rootVisualElement.Q<VisualElement>("InspectorView");
+            
+            OnSelectionChange();
         }
 
         const string TextFieldName = "BehaviorTreeName";

@@ -1,19 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5084194511403826239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 765d9ea596854d6e8960648f703be663, type: 3}
-  m_Name: SelectorCompositeNodeBbm
-  m_EditorClassIdentifier: 
-  NodeGraphPosition: {x: 45.64, y: 124.96001}
-  _started: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26,7 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6421cfed914d8d96adff46db098d29, type: 3}
   m_Name: BehaviourTreeBbm
   m_EditorClassIdentifier: 
---- !u!114 &2280176800417114590
+--- !u!114 &246846144323893261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fa1c7c50d964b6bbb02b1f0ade9f089, type: 3}
+  m_Name: SequencerCompositeNodeBbm
+  m_EditorClassIdentifier: 
+  NodeGraphPosition: {x: 166.64, y: -182.48001}
+  _started: 0
+--- !u!114 &5157058310554693391
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -38,9 +38,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afdca235c85341149db7752f04ac9b09, type: 3}
   m_Name: RepeatDecoratorNodeBbm
   m_EditorClassIdentifier: 
-  NodeGraphPosition: {x: 187, y: 57.759995}
+  NodeGraphPosition: {x: 167, y: -52.849983}
   _started: 0
---- !u!114 &7901490888319151189
+--- !u!114 &6554274340630791446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8a8872797ea48619edea2d0e25166fa, type: 3}
+  m_Name: WaitActionNodeBbm
+  m_EditorClassIdentifier: 
+  NodeGraphPosition: {x: 0, y: 0}
+  _started: 0
+--- !u!114 &7551062273383350046
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -52,5 +66,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c000a6f096d44398bb08401705a8d4f, type: 3}
   m_Name: DebugLogActionNodeBbm
   m_EditorClassIdentifier: 
-  NodeGraphPosition: {x: 0, y: 0}
+  NodeGraphPosition: {x: 167, y: 80.40003}
   _started: 0

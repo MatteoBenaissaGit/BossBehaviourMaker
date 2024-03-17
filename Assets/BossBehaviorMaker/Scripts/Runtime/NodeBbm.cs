@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace BossBehaviorMaker.Scripts.Runtime
 {
@@ -60,6 +61,14 @@ namespace BossBehaviorMaker.Scripts.Runtime
         public void Restart()
         {
             OnStart();
+        }
+        
+        public virtual void AddChild(NodeBbm child){}
+        public virtual void RemoveChild(NodeBbm child){}
+        public virtual List<NodeBbm> GetChildren()
+        {
+            List<NodeBbm> children = new List<NodeBbm>();
+            return children;
         }
     }
 }

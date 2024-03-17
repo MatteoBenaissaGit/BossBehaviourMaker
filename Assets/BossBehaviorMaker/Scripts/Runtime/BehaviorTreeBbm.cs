@@ -26,5 +26,34 @@ namespace BossBehaviorMaker.Scripts.Runtime
 
             return TreeState;
         }
+
+        public void AddChild(NodeBbm parent, NodeBbm child)
+        {
+            if (Nodes.Contains(parent) == false)
+            {
+                return;
+            }
+            parent.AddChild(child);
+
+            if (Nodes.Contains(child))
+            {
+                return;
+            }
+            Nodes.Add(child);
+        }
+        
+        public void RemoveChild(NodeBbm parent, NodeBbm child)
+        {
+            if (Nodes.Contains(parent) == false)
+            {
+                return;
+            }    
+            parent.RemoveChild(child);
+        }
+
+        public List<NodeBbm> GetChildren(NodeBbm parent)
+        {
+            return Nodes.Contains(parent) ? parent.GetChildren() : new List<NodeBbm>();
+        }
     }
 }

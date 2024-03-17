@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BossBehaviorMaker.Scripts.Decorators;
 using BossBehaviorMaker.Scripts.Runtime;
@@ -39,28 +40,68 @@ namespace BossBehaviorMaker.Scripts.Editor
             DeleteElements(graphElements);
             graphViewChanged += OnGraphViewChanged;
 
+            if (_hasTree == false)
+            {
+                return;
+            }
             _tree.Nodes.ForEach(CreateNodeView);
+
+            foreach (NodeBbm node in _tree.Nodes)
+            {
+                BossBehaviorMakerNodeView parentView = GetNodeByGuid(node.Guid) as BossBehaviorMakerNodeView;
+                foreach (NodeBbm child in _tree.GetChildren(node))
+                {
+                    BossBehaviorMakerNodeView childView = GetNodeByGuid(child.Guid) as BossBehaviorMakerNodeView;
+                    Edge edge = parentView?.OutputPort.ConnectTo(childView?.InputPort);
+                    if (edge == null)
+                    {
+                        continue;
+                    }
+                    AddElement(edge);
+                }
+            }
         }
 
         private GraphViewChange OnGraphViewChanged(GraphViewChange graphViewChange)
         {
-            if (graphViewChange.elementsToRemove == null)
+            if (graphViewChange.elementsToRemove != null)
             {
-                goto returnChanges;
-            }
-
-            foreach (GraphElement element in graphViewChange.elementsToRemove)
-            {
-                BossBehaviorMakerNodeView nodeView = element as BossBehaviorMakerNodeView;
-
-                if (nodeView == null)
+                foreach (GraphElement element in graphViewChange.elementsToRemove)
                 {
-                    continue;
+                    BossBehaviorMakerNodeView nodeView = element as BossBehaviorMakerNodeView;
+                    if (nodeView != null)
+                    {
+                        DeleteNode(nodeView.Node);
+                    }
+                
+                    Edge edge = element as Edge;
+                    if (edge != null)
+                    {
+                        BossBehaviorMakerNodeView parentView = edge.output.node as BossBehaviorMakerNodeView;
+                        BossBehaviorMakerNodeView childView = edge.input.node as BossBehaviorMakerNodeView;
+                        if (parentView == null || childView == null)
+                        {
+                            continue;
+                        }
+                        _tree.RemoveChild(parentView.Node, childView.Node);
+                    }
                 }
-                DeleteNode(nodeView.Node);
             }
             
-            returnChanges:
+            if (graphViewChange.edgesToCreate != null && _hasTree)
+            {
+                foreach (Edge edge in graphViewChange.edgesToCreate)
+                {
+                    BossBehaviorMakerNodeView parentView = edge.output.node as BossBehaviorMakerNodeView;
+                    BossBehaviorMakerNodeView childView = edge.input.node as BossBehaviorMakerNodeView;
+                    if (parentView == null || childView == null)
+                    {
+                        continue;
+                    }
+                    _tree.AddChild(parentView.Node, childView.Node);
+                }
+            }
+            
             return graphViewChange;
         }
 
@@ -131,6 +172,14 @@ namespace BossBehaviorMaker.Scripts.Editor
             }
             
             base.BuildContextualMenu(menuEvent);
+        }
+
+        public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
+        {
+            return ports.ToList()!.Where(
+                endPort => endPort.direction != startPort.direction
+                           && endPort.node != startPort.node
+                           && endPort.portType == startPort.portType).ToList();
         }
     }
 }

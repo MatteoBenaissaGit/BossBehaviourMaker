@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
-namespace BossBehaviorMaker.Prefabs.Character
+namespace BossBehaviorMaker.GameplayDemoElements.Character
 {
     [Serializable]
     public struct InputKeyCodes
@@ -17,10 +15,16 @@ namespace BossBehaviorMaker.Prefabs.Character
     public class TopDownCharacterController : MonoBehaviour
     {
         [SerializeField] private InputKeyCodes _inputs;
-        [SerializeField] private Camera _camera;
         [SerializeField] private Animator _animator;
-        [SerializeField] private float _characterSpeed = 0.1f;
+        [SerializeField] private float _characterSpeed = 10f;
         
+        private Camera _camera;
+
+        private void Awake()
+        {
+            _camera = Camera.main;
+        }
+
         private void Update()
         {
             Move(GetInputs());
@@ -40,7 +44,7 @@ namespace BossBehaviorMaker.Prefabs.Character
         {
             //get the normalized world vector
             Vector2 inputVectorNormalized = inputVector.normalized;
-            Vector3 worldVector = new Vector3(inputVectorNormalized.x, 0, inputVectorNormalized.y) * _characterSpeed;
+            Vector3 worldVector = new Vector3(inputVectorNormalized.x, 0, inputVectorNormalized.y) * (_characterSpeed * Time.deltaTime);
 
             //transform its direction depending on the camera
             Vector3 baseCameraRotation = _camera.transform.rotation.eulerAngles;

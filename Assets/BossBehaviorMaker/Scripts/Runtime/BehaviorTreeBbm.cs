@@ -9,6 +9,7 @@ namespace BossBehaviorMaker.Scripts.Runtime
         public NodeBbm RootNode { get; set; }
         public NodeBbm.NodeBbmState TreeState { get; set; } = NodeBbm.NodeBbmState.Running;
         public List<NodeBbm> Nodes { get; set; } = new List<NodeBbm>();
+        public BossBehaviorTreeRunner Runner { get; set; }
 
         public NodeBbm.NodeBbmState Update()
         {

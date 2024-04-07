@@ -1,4 +1,6 @@
-﻿using BossBehaviorMaker.Scripts.Runtime;
+﻿using System;
+using BossBehaviorMaker.Scripts.Runtime;
+using UnityEngine;
 
 namespace BossBehaviorMaker.Scripts.Decorators
 {
@@ -9,7 +11,7 @@ namespace BossBehaviorMaker.Scripts.Decorators
         /// -1 let the node run until success.
         /// -2 let the node run until failure.
         /// </summary>
-        public int NumberOfRepetitions { get; set; } = -1;
+        [field:SerializeField] public int NumberOfRepetitions { get; set; } = -1;
 
         private int _currentRepetitions;
 
@@ -43,11 +45,15 @@ namespace BossBehaviorMaker.Scripts.Decorators
             
             if (NumberOfRepetitions == -1 && Child.State == NodeBbmState.Success)
             {
-                return NodeBbmState.Success;
-            }
-            if (NumberOfRepetitions == -1 && Child.State == NodeBbmState.Failure)
-            {
-                return NodeBbmState.Success;
+                switch (Child.State)
+                {
+                    case NodeBbmState.Success:
+                        return NodeBbmState.Success;
+                        break;
+                    case NodeBbmState.Failure:
+                        return NodeBbmState.Success;
+                        break;
+                }
             }
 
             return NodeBbmState.Running;

@@ -1,10 +1,11 @@
 ﻿using BossBehaviorMaker.Scripts.Runtime;
+using UnityEngine;
 
 namespace BossBehaviorMaker.Scripts.Composites
 {
     public class SelectorCompositeNodeBbm : CompositeNodeBbm
     {
-        public int NodeToRun { get; set; } = 0;
+        [field:SerializeField] public int NodeToRun { get; set; } = 0;
 
         public override string ToString()
         {

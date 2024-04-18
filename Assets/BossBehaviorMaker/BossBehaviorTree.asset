@@ -1,21 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7679329908561975975
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afdca235c85341149db7752f04ac9b09, type: 3}
-  m_Name: RepeatDecoratorNodeBbm
-  m_EditorClassIdentifier: 
-  NodeGraphPosition: {x: 62.227497, y: -40.062473}
-  _started: 0
-  <NumberOfRepetitions>k__BackingField: 3
---- !u!114 &-3770518401478383710
+--- !u!114 &-4211029592526439721
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -27,9 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a8872797ea48619edea2d0e25166fa, type: 3}
   m_Name: WaitActionNodeBbm
   m_EditorClassIdentifier: 
-  NodeGraphPosition: {x: 176, y: 183.00002}
+  Guid: e9aaa63ee206afb4d990ba8e4c577051
+  NodeGraphPosition: {x: 341.88, y: 229}
+  NodeGraphSize: {x: 164, y: 77}
   _started: 0
   <Duration>k__BackingField: 1
+--- !u!114 &-3425488535070576349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fa1c7c50d964b6bbb02b1f0ade9f089, type: 3}
+  m_Name: SequencerCompositeNodeBbm
+  m_EditorClassIdentifier: 
+  Guid: 35d7211a856bc1045994441092f62abe
+  NodeGraphPosition: {x: 71.30001, y: 87.40002}
+  NodeGraphSize: {x: 225, y: 77}
+  _started: 0
+  Children:
+  - {fileID: 6692303263494451620}
+  - {fileID: -4211029592526439721}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6421cfed914d8d96adff46db098d29, type: 3}
   m_Name: BossBehaviorTree
   m_EditorClassIdentifier: 
---- !u!114 &1814133022526066131
+--- !u!114 &3329283898660450113
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -51,12 +57,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fa1c7c50d964b6bbb02b1f0ade9f089, type: 3}
-  m_Name: SequencerCompositeNodeBbm
+  m_Script: {fileID: 11500000, guid: afdca235c85341149db7752f04ac9b09, type: 3}
+  m_Name: RepeatDecoratorNodeBbm
   m_EditorClassIdentifier: 
-  NodeGraphPosition: {x: 227.62001, y: 93.50002}
+  Guid: 3be268ccecbed62438869b72350ff829
+  NodeGraphPosition: {x: 71.000015, y: -59.8}
+  NodeGraphSize: {x: 200, y: 77}
   _started: 0
---- !u!114 &2538612639064488997
+  Child: {fileID: -3425488535070576349}
+  <NumberOfRepetitions>k__BackingField: 3
+--- !u!114 &6692303263494451620
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -68,6 +78,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c000a6f096d44398bb08401705a8d4f, type: 3}
   m_Name: DebugLogActionNodeBbm
   m_EditorClassIdentifier: 
-  NodeGraphPosition: {x: 366.03998, y: 183}
+  Guid: 923ef8d1c3e53a445818aa62905f7284
+  NodeGraphPosition: {x: 111, y: 229.15999}
+  NodeGraphSize: {x: 198, y: 77}
   _started: 0
-  <Message>k__BackingField: DebugMessage
+  <Message>k__BackingField: test

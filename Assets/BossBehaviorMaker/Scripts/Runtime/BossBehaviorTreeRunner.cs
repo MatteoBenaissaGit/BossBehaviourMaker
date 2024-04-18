@@ -29,6 +29,8 @@ namespace BossBehaviorMaker.Scripts.Runtime
         // Tree reference field to fill in the editor 
         [SerializeField] private BehaviorTreeBbm _tree;
 
+        private bool _isStarted;
+
         /// <summary>
         /// This method start the behavior tree, call it whenever you want your boss to start acting with the behavior tree
         /// </summary>
@@ -45,11 +47,12 @@ namespace BossBehaviorMaker.Scripts.Runtime
             _tree.Runner = this;
             
             OnStart?.Invoke();
+            _isStarted = true;
         }
 
         private void Update()
         {
-            if (_tree == null)
+            if (_tree == null || _isStarted == false)
             {
                 return;
             }

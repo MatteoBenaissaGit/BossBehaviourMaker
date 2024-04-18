@@ -12,11 +12,13 @@ namespace BossBehaviorMaker.Scripts.Editor
 {
     public class BossBehaviorMakerGraphView : GraphView
     {
-        public new class UxmlFactory : UxmlFactory<BossBehaviorMakerGraphView, UxmlTraits>{}
+        public new class UxmlFactory : UxmlFactory<BossBehaviorMakerGraphView, UxmlTraits>
+        {
+        }
 
         private BehaviorTreeBbm _tree;
         private bool _hasTree => _tree != null;
-        
+
         public BossBehaviorMakerGraphView()
         {
             style.flexGrow = 1f;
@@ -44,19 +46,37 @@ namespace BossBehaviorMaker.Scripts.Editor
             {
                 return;
             }
+            
+            // Load all nodes from the tree in the node list
+            string parentPath = AssetDatabase.GetAssetPath(_tree);
+            UnityEngine.Object[] allChildren = AssetDatabase.LoadAllAssetsAtPath(parentPath);
+            foreach (UnityEngine.Object obj in allChildren)
+            {
+                NodeBbm node = obj as NodeBbm;
+                if (_tree.Nodes.Contains(node) == false && node != null)
+                {
+                    _tree.Nodes.Add(node);
+                }
+            }
+            _tree.Nodes.Remove(null);
+            
+            //add nodes
             _tree.Nodes.ForEach(CreateNodeView);
 
+            //aad edges
+            Debug.Log($"populate view with {_tree.Nodes.Count} nodes");
             foreach (NodeBbm node in _tree.Nodes)
             {
-                BossBehaviorMakerNodeView parentView = GetNodeByGuid(node.Guid) as BossBehaviorMakerNodeView;
+                BossBehaviorMakerNodeView nodeView = GetNodeByGuid(node.Guid) as BossBehaviorMakerNodeView;
                 foreach (NodeBbm child in _tree.GetChildren(node))
                 {
                     BossBehaviorMakerNodeView childView = GetNodeByGuid(child.Guid) as BossBehaviorMakerNodeView;
-                    Edge edge = parentView?.OutputPort.ConnectTo(childView?.InputPort);
+                    Edge edge = nodeView?.OutputPort.ConnectTo(childView?.InputPort);
                     if (edge == null)
                     {
                         continue;
                     }
+
                     AddElement(edge);
                 }
             }
@@ -73,7 +93,7 @@ namespace BossBehaviorMaker.Scripts.Editor
                     {
                         DeleteNode(nodeView.Node);
                     }
-                
+
                     Edge edge = element as Edge;
                     if (edge != null)
                     {
@@ -83,11 +103,12 @@ namespace BossBehaviorMaker.Scripts.Editor
                         {
                             continue;
                         }
+
                         _tree.RemoveChild(parentView.Node, childView.Node);
                     }
                 }
             }
-            
+
             if (graphViewChange.edgesToCreate != null && _hasTree)
             {
                 foreach (Edge edge in graphViewChange.edgesToCreate)
@@ -98,17 +119,20 @@ namespace BossBehaviorMaker.Scripts.Editor
                     {
                         continue;
                     }
+
                     _tree.AddChild(parentView.Node, childView.Node);
                 }
             }
-            
+
             return graphViewChange;
         }
 
         private void CreateNodeView(NodeBbm node)
         {
             BossBehaviorMakerNodeView nodeView = new BossBehaviorMakerNodeView(node);
+            Rect rect = new Rect(node.NodeGraphPosition, node.NodeGraphSize);
             AddElement(nodeView);
+            nodeView.SetPosition(rect);
         }
 
         private void CreateNode(System.Type type)
@@ -121,14 +145,15 @@ namespace BossBehaviorMaker.Scripts.Editor
             NodeBbm node = ScriptableObject.CreateInstance(type) as NodeBbm;
             node.name = type.Name;
             node.Guid = GUID.Generate().ToString();
-            
+
             _tree.Nodes.Add(node);
             CreateNodeView(node);
-            
+
             if (_tree.RootNode == null)
             {
                 _tree.RootNode = node;
             }
+
             AssetDatabase.AddObjectToAsset(node, _tree);
             AssetDatabase.SaveAssets();
         }
@@ -146,7 +171,7 @@ namespace BossBehaviorMaker.Scripts.Editor
             {
                 _tree.RootNode = _tree.Nodes.FirstOrDefault();
             }
-            
+
             AssetDatabase.RemoveObjectFromAsset(node);
             AssetDatabase.SaveAssets();
         }
@@ -158,7 +183,7 @@ namespace BossBehaviorMaker.Scripts.Editor
                 menuEvent.menu.AppendAction($"No tree selected", null);
                 return;
             }
-            
+
             TypeCache.TypeCollection types = TypeCache.GetTypesDerivedFrom<NodeBbm>();
 
             foreach (Type type in types)
@@ -170,7 +195,7 @@ namespace BossBehaviorMaker.Scripts.Editor
 
                 menuEvent.menu.AppendAction($"{type.BaseType.Name}/{type.Name}", _ => CreateNode(type));
             }
-            
+
             base.BuildContextualMenu(menuEvent);
         }
 

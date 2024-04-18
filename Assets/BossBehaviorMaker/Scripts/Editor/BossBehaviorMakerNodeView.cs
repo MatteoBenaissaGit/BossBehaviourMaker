@@ -29,11 +29,14 @@ namespace BossBehaviorMaker.Scripts.Editor
             CreateOutputPorts();
         }
 
-        public override void SetPosition(Rect newPos)
+        public override void SetPosition(Rect rect)
         {
-            base.SetPosition(newPos);
-            Node.NodeGraphPosition.x = newPos.xMin;
-            Node.NodeGraphPosition.y = newPos.yMin;
+            base.SetPosition(rect);
+            
+            Vector2 newPosition = new Vector2(rect.xMin, rect.yMin);
+            Node.NodeGraphPosition = newPosition;
+            
+            Node.NodeGraphSize = rect.size;
         }
 
         private void CreateInputPorts()

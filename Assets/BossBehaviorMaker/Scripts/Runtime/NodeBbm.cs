@@ -12,10 +12,11 @@ namespace BossBehaviorMaker.Scripts.Runtime
             Failure = 2
         }
 
-        public string Guid { get; set; }
         public NodeBbmState State { get; set; } = NodeBbmState.Running;
         
+        public string Guid;
         public Vector2 NodeGraphPosition;
+        public Vector2 NodeGraphSize;
         
         [SerializeField] private bool _started;
 

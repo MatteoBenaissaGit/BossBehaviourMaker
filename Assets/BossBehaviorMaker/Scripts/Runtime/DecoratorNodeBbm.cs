@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 
 namespace BossBehaviorMaker.Scripts.Runtime
 {
     public abstract class DecoratorNodeBbm : NodeBbm
     {
-        public NodeBbm Child { get; set; }
+        [SerializeField] public NodeBbm Child;
 
         public override void AddChild(NodeBbm child)
         {

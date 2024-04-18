@@ -17,8 +17,7 @@ namespace BossBehaviorMaker.Scripts.Editor
 
         public void CreateGUI()
         {
-            VisualTreeAsset visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(
-                    "Assets/BossBehaviorMaker/UIBuilder/BossBehaviorMakerEditor.uxml");
+            VisualTreeAsset visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/BossBehaviorMaker/UIBuilder/BossBehaviorMakerEditor.uxml");
             visualTree.CloneTree(rootVisualElement);
 
             _treeView = rootVisualElement.Q<BossBehaviorMakerGraphView>();

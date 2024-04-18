@@ -1,13 +1,15 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace BossBehaviorMaker.Scripts.Runtime
 {
     public abstract class CompositeNodeBbm : NodeBbm
     {
-        public List<NodeBbm> Children { get; set; } = new List<NodeBbm>();
+        [SerializeField] public List<NodeBbm> Children;
 
         public override void AddChild(NodeBbm child)
         {
+            Children ??= new List<NodeBbm>();
             Children.Add(child);
         }
 

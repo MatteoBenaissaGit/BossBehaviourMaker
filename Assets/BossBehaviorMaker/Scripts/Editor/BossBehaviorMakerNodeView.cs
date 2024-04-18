@@ -25,6 +25,8 @@ namespace BossBehaviorMaker.Scripts.Editor
             style.left = Node.NodeGraphPosition.x;
             style.top = Node.NodeGraphPosition.y;
             
+            SetColor();
+            
             CreateInputPorts();
             CreateOutputPorts();
         }
@@ -74,6 +76,29 @@ namespace BossBehaviorMaker.Scripts.Editor
             OutputPort.portName = "";
             OutputPort.portColor = new Color(0.63f, 0.22f, 0.23f);
             outputContainer.Add(OutputPort);
+        }
+
+        private void SetColor()
+        {
+            Color color = Color.white;
+            switch (Node)
+            {
+                case ActionNodeBbm :
+                    color = new Color(1f, 0.94f, 0f, 0.35f);
+                    style.backgroundColor = color;
+                    elementTypeColor = color;
+                    break;
+                case CompositeNodeBbm :
+                    color = new Color(0.32f, 1f, 0f, 0.35f);
+                    style.backgroundColor = color;
+                    elementTypeColor = color;
+                    break;
+                case DecoratorNodeBbm :
+                    color = new Color(1f, 0.45f, 0f, 0.35f);
+                    style.backgroundColor = color;
+                    elementTypeColor = color;
+                    break;
+            }
         }
     }
 }

@@ -24,6 +24,28 @@ namespace BossBehaviorMaker.Scripts.Editor
             style.flexGrow = 1f;
             Insert(0, new GridBackground());
             AddManipulators();
+            
+            CreateMiniMap();
+        }
+
+        private void CreateMiniMap()
+        {
+            MiniMap miniMap = new MiniMap { anchored = true, 
+                capabilities = Capabilities.Movable | Capabilities.Selectable | Capabilities.Resizable};
+            
+            miniMap.SetPosition(new Rect(19, 30, 100, 100));
+            miniMap.maxHeight = 100;
+            miniMap.maxWidth = 100;
+
+            StyleColor backgroundColor = new StyleColor(new Color32(29, 29, 30, 255));
+            StyleColor borderColor = new StyleColor(new Color32(51, 51, 51, 255));
+            miniMap.style.backgroundColor = backgroundColor;
+            miniMap.style.borderTopColor = borderColor;
+            miniMap.style.borderRightColor = borderColor;
+            miniMap.style.borderBottomColor = borderColor;
+            miniMap.style.borderTopColor = borderColor;
+            
+            Add(miniMap);
         }
 
         private void AddManipulators()

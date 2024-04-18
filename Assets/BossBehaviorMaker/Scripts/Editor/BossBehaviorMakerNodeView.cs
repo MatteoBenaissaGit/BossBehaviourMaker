@@ -2,6 +2,7 @@
 using BossBehaviorMaker.Scripts.Runtime;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace BossBehaviorMaker.Scripts.Editor
 {
@@ -84,21 +85,26 @@ namespace BossBehaviorMaker.Scripts.Editor
             switch (Node)
             {
                 case ActionNodeBbm :
-                    color = new Color(1f, 0.94f, 0f, 0.35f);
+                    color = new Color(1f, 0.94f, 0f, 0.25f);
                     style.backgroundColor = color;
-                    elementTypeColor = color;
+                    elementTypeColor = new Color(color.r,color.g,color.b,1);
                     break;
                 case CompositeNodeBbm :
-                    color = new Color(0.32f, 1f, 0f, 0.35f);
+                    color = new Color(0.32f, 1f, 0f, 0.25f);
                     style.backgroundColor = color;
-                    elementTypeColor = color;
+                    elementTypeColor = new Color(color.r,color.g,color.b,1);
                     break;
                 case DecoratorNodeBbm :
-                    color = new Color(1f, 0.45f, 0f, 0.35f);
+                    color = new Color(1f, 0.45f, 0f, 0.25f);
                     style.backgroundColor = color;
-                    elementTypeColor = color;
+                    elementTypeColor = new Color(color.r,color.g,color.b,0.5f);
                     break;
             }
+
+            style.borderBottomLeftRadius = 10;
+            style.borderBottomRightRadius = 10;
+            style.borderTopLeftRadius = 10;
+            style.borderTopRightRadius = 10;
         }
     }
 }

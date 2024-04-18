@@ -86,7 +86,6 @@ namespace BossBehaviorMaker.Scripts.Editor
             _tree.Nodes.ForEach(CreateNodeView);
 
             //aad edges
-            Debug.Log($"populate view with {_tree.Nodes.Count} nodes");
             foreach (NodeBbm node in _tree.Nodes)
             {
                 BossBehaviorMakerNodeView nodeView = GetNodeByGuid(node.Guid) as BossBehaviorMakerNodeView;

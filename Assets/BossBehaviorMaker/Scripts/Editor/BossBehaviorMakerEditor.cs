@@ -1,5 +1,9 @@
+using System.Collections.Generic;
+using System.Linq;
 using BossBehaviorMaker.Scripts.Runtime;
+using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
@@ -7,7 +11,9 @@ namespace BossBehaviorMaker.Scripts.Editor
 {
     public class BossBehaviorMakerEditor : EditorWindow
     {
-        private BossBehaviorMakerGraphView _treeView;
+        public static BossBehaviorMakerEditor Instance { get; private set; }
+        
+        public BossBehaviorMakerGraphView TreeView { get; private set; }
         
         [MenuItem("Tools/BossBehaviorMaker")]
         public static void OpenTreeEditor()
@@ -17,10 +23,12 @@ namespace BossBehaviorMaker.Scripts.Editor
 
         public void CreateGUI()
         {
+            Instance = this;
+            
             VisualTreeAsset visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/BossBehaviorMaker/UIBuilder/BossBehaviorMakerEditor.uxml");
             visualTree.CloneTree(rootVisualElement);
 
-            _treeView = rootVisualElement.Q<BossBehaviorMakerGraphView>();
+            TreeView = rootVisualElement.Q<BossBehaviorMakerGraphView>();
             rootVisualElement.Q<VisualElement>("InspectorView");
             
             OnSelectionChange();
@@ -39,10 +47,10 @@ namespace BossBehaviorMaker.Scripts.Editor
                 rootVisualElement.Bind(serializedObject);
                 
                 //populate the tree view
-                _treeView = rootVisualElement.Q<BossBehaviorMakerGraphView>(GraphViewName);
-                if (_treeView != null)
+                TreeView = rootVisualElement.Q<BossBehaviorMakerGraphView>(GraphViewName);
+                if (TreeView != null)
                 {
-                    _treeView.PopulateView(tree);
+                    TreeView.PopulateView(tree);
                 }
             }
             else
@@ -55,6 +63,11 @@ namespace BossBehaviorMaker.Scripts.Editor
                     textField.value = string.Empty;
                 }
             }
+        }
+
+        public BossBehaviorMakerGraphView GetGraphView()
+        {
+            return rootVisualElement.Q<BossBehaviorMakerGraphView>("BehaviorTreeGraphView");
         }
     }
 }

@@ -5,7 +5,7 @@ namespace BossBehaviorMaker.Scripts.Actions
 {
     public class DebugLogActionNodeBbm : ActionNodeBbm
     {
-        [field:SerializeField] public string Message { get; set; }
+        [SerializeField] public string Message = "Debug message";
 
         public override string ToString()
         {

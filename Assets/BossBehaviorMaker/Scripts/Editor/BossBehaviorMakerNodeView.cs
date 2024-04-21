@@ -32,6 +32,18 @@ namespace BossBehaviorMaker.Scripts.Editor
             CreateOutputPorts();
         }
 
+        public override void OnSelected()
+        {
+            base.OnSelected();
+            BossBehaviorMakerEditor.Instance.GetGraphView().UpdateInspectorPanel();
+        }
+
+        public override void OnUnselected()
+        {
+            base.OnUnselected();
+            BossBehaviorMakerEditor.Instance.GetGraphView().UpdateInspectorPanel();
+        }
+
         public override void SetPosition(Rect rect)
         {
             base.SetPosition(rect);
@@ -44,14 +56,14 @@ namespace BossBehaviorMaker.Scripts.Editor
 
         private void CreateInputPorts()
         {
-            InputPort = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Multi, typeof(NodeBbm));
+            InputPort = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Multi, typeof(NodeBbm));
             if (InputPort == null)
             {
                 return;
             }
 
-            InputPort.portName = "";
-            InputPort.portColor = new Color(0.27f, 0.58f, 0.26f);
+            InputPort.portName = "Input";
+            InputPort.portColor = new Color(0.42f, 1f, 0.36f);
             inputContainer.Add(InputPort);
         }
 
@@ -74,8 +86,8 @@ namespace BossBehaviorMaker.Scripts.Editor
                 return;
             }
 
-            OutputPort.portName = "";
-            OutputPort.portColor = new Color(0.63f, 0.22f, 0.23f);
+            OutputPort.portName = "Output";
+            OutputPort.portColor = new Color(1f, 0.4f, 0.45f);
             outputContainer.Add(OutputPort);
         }
 

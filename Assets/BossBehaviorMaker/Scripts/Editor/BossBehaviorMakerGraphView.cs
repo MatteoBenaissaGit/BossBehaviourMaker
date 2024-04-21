@@ -5,6 +5,7 @@ using BossBehaviorMaker.Scripts.Decorators;
 using BossBehaviorMaker.Scripts.Runtime;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,20 +13,37 @@ namespace BossBehaviorMaker.Scripts.Editor
 {
     public class BossBehaviorMakerGraphView : GraphView
     {
+        private BehaviorTreeBbm _tree;
+        private bool _hasTree => _tree != null;
+        
         public new class UxmlFactory : UxmlFactory<BossBehaviorMakerGraphView, UxmlTraits>
         {
         }
 
-        private BehaviorTreeBbm _tree;
-        private bool _hasTree => _tree != null;
-
         public BossBehaviorMakerGraphView()
         {
             style.flexGrow = 1f;
-            Insert(0, new GridBackground());
+            CreateGridBackground();
             AddManipulators();
-            
             CreateMiniMap();
+            SetToolbarButtons();
+        }
+
+        private void CreateGridBackground()
+        {
+            GridBackground gridBackground = new GridBackground()
+            {
+                style =
+                {
+                    position = Position.Absolute,
+                    width = 10000,
+                    height = 10000,
+                },
+            };
+            Insert(0, gridBackground);
+
+            StyleSheet styleSheet = (StyleSheet)EditorGUIUtility.Load("Assets/BossBehaviorMaker/UIBuilder/BbmGraphViewStyles.uss");
+            styleSheets.Add(styleSheet);
         }
 
         private void CreateMiniMap()
@@ -33,7 +51,7 @@ namespace BossBehaviorMaker.Scripts.Editor
             MiniMap miniMap = new MiniMap { anchored = true, 
                 capabilities = Capabilities.Movable | Capabilities.Selectable | Capabilities.Resizable};
             
-            miniMap.SetPosition(new Rect(19, 30, 100, 100));
+            miniMap.SetPosition(new Rect(20, 50, 100, 100));
             miniMap.maxHeight = 100;
             miniMap.maxWidth = 100;
 
@@ -46,6 +64,38 @@ namespace BossBehaviorMaker.Scripts.Editor
             miniMap.style.borderTopColor = borderColor;
             
             Add(miniMap);
+        }
+
+        private void SetToolbarButtons()
+        {
+            Toolbar toolbar = new Toolbar
+            {
+                style =
+                {
+                    height = 25
+                }
+            };
+            Add(toolbar);
+            
+            ToolbarButton minimapButton = new ToolbarButton
+            {
+                text = "Toggle MiniMap",
+                clickable = new Clickable(ToggleMiniMap),
+                style =
+                {
+                    borderBottomRightRadius = 5,
+                    borderBottomLeftRadius = 5,
+                    borderTopRightRadius = 5,
+                    borderTopLeftRadius = 5,
+                    marginLeft = 10,
+                    height = 20,
+                    backgroundColor = new StyleColor(new Color32(50, 50, 50, 255)),
+                    alignSelf = new StyleEnum<Align>(Align.Center),
+                    unityTextAlign = new StyleEnum<TextAnchor>(TextAnchor.MiddleCenter)
+                }
+            };
+
+            toolbar.Add(minimapButton);
         }
 
         private void AddManipulators()
@@ -105,6 +155,8 @@ namespace BossBehaviorMaker.Scripts.Editor
 
         private GraphViewChange OnGraphViewChanged(GraphViewChange graphViewChange)
         {
+            UpdateInspectorPanel();
+            
             if (graphViewChange.elementsToRemove != null)
             {
                 foreach (GraphElement element in graphViewChange.elementsToRemove)
@@ -146,6 +198,13 @@ namespace BossBehaviorMaker.Scripts.Editor
             }
 
             return graphViewChange;
+        }
+        
+        public void UpdateInspectorPanel()
+        {
+            SplitViewBbm inspectorPanel = BossBehaviorMakerEditor.Instance.rootVisualElement.Q<SplitViewBbm>("SplitViewBbm");
+            IEnumerable<GraphElement> selectedElements = selection.OfType<GraphElement>();
+            inspectorPanel.OnSelectionChanged(selectedElements);
         }
 
         private void CreateNodeView(NodeBbm node)
@@ -226,6 +285,12 @@ namespace BossBehaviorMaker.Scripts.Editor
                 endPort => endPort.direction != startPort.direction
                            && endPort.node != startPort.node
                            && endPort.portType == startPort.portType).ToList();
+        }
+        
+        private void ToggleMiniMap()
+        {
+            MiniMap miniMap = this.Q<MiniMap>();
+            miniMap.visible = miniMap.visible == false;
         }
     }
 }

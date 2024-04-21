@@ -5,6 +5,8 @@ namespace BossBehaviorMaker.Scripts.Composites
 {
     public class SequencerCompositeNodeBbm : CompositeNodeBbm
     {
+        //TODO set up child order
+        
         private int _current;
 
         public override string ToString()

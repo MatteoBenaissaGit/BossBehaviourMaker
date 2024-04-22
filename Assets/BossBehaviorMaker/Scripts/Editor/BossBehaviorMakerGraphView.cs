@@ -13,8 +13,26 @@ namespace BossBehaviorMaker.Scripts.Editor
 {
     public class BossBehaviorMakerGraphView : GraphView
     {
+        public BossBehaviorMakerNodeView CurrentSelectedNodeView
+        {
+            get => _currentSelectedNodeView;
+            set
+            {
+                _currentSelectedNodeView = value;
+                if (_currentSelectedNodeView == null)
+                {
+                    _rootNodeButton.style.backgroundColor = new StyleColor(new Color32(144, 144, 144, 255));
+                    return;
+                }
+                _rootNodeButton.style.backgroundColor = new StyleColor(new Color32(50, 50, 50, 255));
+            }
+        }
+        public BossBehaviorMakerNodeView RootNodeView { get; set;}
+        
         private BehaviorTreeBbm _tree;
         private bool _hasTree => _tree != null;
+        private BossBehaviorMakerNodeView _currentSelectedNodeView;
+        private ToolbarButton _rootNodeButton;
         
         public new class UxmlFactory : UxmlFactory<BossBehaviorMakerGraphView, UxmlTraits>
         {
@@ -56,7 +74,7 @@ namespace BossBehaviorMaker.Scripts.Editor
             miniMap.maxWidth = 100;
 
             StyleColor backgroundColor = new StyleColor(new Color32(29, 29, 30, 255));
-            StyleColor borderColor = new StyleColor(new Color32(51, 51, 51, 255));
+            StyleColor borderColor = new StyleColor(new Color32(50, 50, 50, 255));
             miniMap.style.backgroundColor = backgroundColor;
             miniMap.style.borderTopColor = borderColor;
             miniMap.style.borderRightColor = borderColor;
@@ -94,8 +112,28 @@ namespace BossBehaviorMaker.Scripts.Editor
                     unityTextAlign = new StyleEnum<TextAnchor>(TextAnchor.MiddleCenter)
                 }
             };
+            
+            _rootNodeButton = new ToolbarButton
+            {
+                text = "Set Root Node",
+                clickable = new Clickable(SetRootNode),
+                style =
+                {
+                    borderBottomRightRadius = 5,
+                    borderBottomLeftRadius = 5,
+                    borderTopRightRadius = 5,
+                    borderTopLeftRadius = 5,
+                    marginLeft = 10,
+                    height = 20,
+                    backgroundColor = new StyleColor(new Color32(50, 50, 50, 255)),
+                    alignSelf = new StyleEnum<Align>(Align.Center),
+                    unityTextAlign = new StyleEnum<TextAnchor>(TextAnchor.MiddleCenter)
+                }
+            };
+            CurrentSelectedNodeView = null;
 
             toolbar.Add(minimapButton);
+            toolbar.Add(_rootNodeButton);
         }
 
         private void AddManipulators()
@@ -213,6 +251,8 @@ namespace BossBehaviorMaker.Scripts.Editor
             Rect rect = new Rect(node.NodeGraphPosition, node.NodeGraphSize);
             AddElement(nodeView);
             nodeView.SetPosition(rect);
+            
+            nodeView.SetAsRoot(nodeView.Node == _tree.RootNode);
         }
 
         private void CreateNode(System.Type type)
@@ -291,6 +331,21 @@ namespace BossBehaviorMaker.Scripts.Editor
         {
             MiniMap miniMap = this.Q<MiniMap>();
             miniMap.visible = miniMap.visible == false;
+        }
+        
+        private void SetRootNode()
+        {
+            RootNodeView?.SetAsRoot(false);
+
+            if (CurrentSelectedNodeView == null)
+            {
+                return;
+            }
+
+            RootNodeView = CurrentSelectedNodeView;
+            RootNodeView.SetAsRoot(true);
+            
+            _tree.RootNode = RootNodeView.Node;
         }
     }
 }

@@ -36,12 +36,14 @@ namespace BossBehaviorMaker.Scripts.Editor
         {
             base.OnSelected();
             BossBehaviorMakerEditor.Instance.GetGraphView().UpdateInspectorPanel();
+            BossBehaviorMakerEditor.Instance.GetGraphView().CurrentSelectedNodeView = this;
         }
 
         public override void OnUnselected()
         {
             base.OnUnselected();
             BossBehaviorMakerEditor.Instance.GetGraphView().UpdateInspectorPanel();
+            BossBehaviorMakerEditor.Instance.GetGraphView().CurrentSelectedNodeView = null;
         }
 
         public override void SetPosition(Rect rect)
@@ -117,6 +119,22 @@ namespace BossBehaviorMaker.Scripts.Editor
             style.borderBottomRightRadius = 10;
             style.borderTopLeftRadius = 10;
             style.borderTopRightRadius = 10;
+        }
+
+        private bool _isRoot;
+        public void SetAsRoot(bool isRoot)
+        {
+            if (isRoot == _isRoot)
+            {
+                return;
+            }
+
+            _isRoot = isRoot;
+            
+            style.borderBottomWidth = isRoot ? 5 : 1;
+            style.borderTopWidth = isRoot ? 5 : 1;
+            
+            title = isRoot ? title + " (ROOT)" : title.Substring(0, title.Length - 7);
         }
     }
 }

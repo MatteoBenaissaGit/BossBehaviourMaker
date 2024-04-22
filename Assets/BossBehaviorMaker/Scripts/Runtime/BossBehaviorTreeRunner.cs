@@ -48,6 +48,7 @@ namespace BossBehaviorMaker.Scripts.Runtime
             
             OnStart?.Invoke();
             _isStarted = true;
+            _tree.TreeState = NodeBbm.NodeBbmState.Running;
         }
 
         private void Update()

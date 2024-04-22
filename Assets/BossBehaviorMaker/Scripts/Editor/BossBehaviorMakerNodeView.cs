@@ -20,7 +20,7 @@ namespace BossBehaviorMaker.Scripts.Editor
             {
                 return;
             }
-            base.title = Node.name;
+            base.title = Node.ToString();
 
             viewDataKey = Node.Guid;
             style.left = Node.NodeGraphPosition.x;

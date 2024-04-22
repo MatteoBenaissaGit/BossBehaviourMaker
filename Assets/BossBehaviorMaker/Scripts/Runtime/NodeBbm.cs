@@ -20,6 +20,8 @@ namespace BossBehaviorMaker.Scripts.Runtime
         
         [SerializeField] private bool _started;
 
+        public abstract string NodeDescription();
+        
         /// <summary>
         /// Runs when the Node first starts running.
         /// Initialize the Node.

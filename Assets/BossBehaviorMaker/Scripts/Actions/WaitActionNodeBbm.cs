@@ -14,6 +14,11 @@ namespace BossBehaviorMaker.Scripts.Actions
             return "Wait";
         }
 
+        public override string NodeDescription()
+        {
+            return "This node will wait for a set amount of time before continuing.";
+        }
+
         protected override void OnStart()
         {
             _startTime = Time.time;

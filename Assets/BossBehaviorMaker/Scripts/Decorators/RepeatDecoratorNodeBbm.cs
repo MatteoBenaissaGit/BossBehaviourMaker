@@ -20,6 +20,11 @@ namespace BossBehaviorMaker.Scripts.Decorators
             return "Repeat";
         }
 
+        public override string NodeDescription()
+        {
+            return "This node will repeat the child node a set number of times.";
+        }
+
         protected override void OnStart()
         {
             _currentRepetitions = 0;

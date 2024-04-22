@@ -21,7 +21,7 @@ namespace BossBehaviorMaker.Scripts.Editor
                 _currentSelectedNodeView = value;
                 if (_currentSelectedNodeView == null)
                 {
-                    _rootNodeButton.style.backgroundColor = new StyleColor(new Color32(144, 144, 144, 255));
+                    _rootNodeButton.style.backgroundColor = new StyleColor(new Color32(24, 24, 24, 255));
                     return;
                 }
                 _rootNodeButton.style.backgroundColor = new StyleColor(new Color32(50, 50, 50, 255));
@@ -251,8 +251,11 @@ namespace BossBehaviorMaker.Scripts.Editor
             Rect rect = new Rect(node.NodeGraphPosition, node.NodeGraphSize);
             AddElement(nodeView);
             nodeView.SetPosition(rect);
-            
-            nodeView.SetAsRoot(nodeView.Node == _tree.RootNode);
+            if (nodeView.Node == _tree.RootNode)
+            {
+                nodeView.SetAsRoot(true);
+                RootNodeView = nodeView;
+            }
         }
 
         private void CreateNode(System.Type type)
@@ -335,13 +338,12 @@ namespace BossBehaviorMaker.Scripts.Editor
         
         private void SetRootNode()
         {
-            RootNodeView?.SetAsRoot(false);
-
             if (CurrentSelectedNodeView == null)
             {
                 return;
             }
 
+            RootNodeView?.SetAsRoot(false);
             RootNodeView = CurrentSelectedNodeView;
             RootNodeView.SetAsRoot(true);
             

@@ -14,6 +14,11 @@ namespace BossBehaviorMaker.Scripts.Composites
             return "Sequencer";
         }
 
+        public override string NodeDescription()
+        {
+            return "This node will run each child node in order until one of them fails.";
+        }
+
         protected override void OnStart()
         {
             _current = 0;

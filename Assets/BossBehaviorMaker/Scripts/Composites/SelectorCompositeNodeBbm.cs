@@ -12,6 +12,11 @@ namespace BossBehaviorMaker.Scripts.Composites
             return "Selector";
         }
 
+        public override string NodeDescription()
+        {
+            return "This node will run each child node in order until one of them succeeds.";
+        }
+
         protected override void OnStart()
         {
         }

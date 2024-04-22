@@ -22,21 +22,30 @@ namespace BossBehaviorMaker.Scripts.Editor
         {
             _inspectorPanel = new VisualElement(){name = "inspector-panel"};
             Add(_inspectorPanel);
+            
+            OnSelectionChanged(new List<GraphElement>());
         }
         
         public void OnSelectionChanged(IEnumerable<GraphElement> selection)
         {
             _inspectorPanel.Clear();
             
-            Label title = new Label("-- Node Properties --");
+            Label title = new Label("Node Properties");
             title.style.unityFontStyleAndWeight = FontStyle.Bold;
-            title.style.fontSize = 20;
+            title.style.fontSize = 15;
+            
             _inspectorPanel.Add(title);
+            
+            Label description = new Label($"Select a node to view its properties.");
+            _inspectorPanel.Add(description);
             
             BossBehaviorMakerNodeView selectedNode = selection.OfType<BossBehaviorMakerNodeView>().FirstOrDefault();
 
             if (selectedNode != null)
             {
+                Label nodeDescription = new Label($"\n{selectedNode.Node.NodeDescription()}\n");
+                _inspectorPanel.Add(nodeDescription);
+                
                 FieldInfo[] fields = selectedNode.Node.GetType().GetFields();
                 for (int i = 0; i < fields.Length; i++)
                 {

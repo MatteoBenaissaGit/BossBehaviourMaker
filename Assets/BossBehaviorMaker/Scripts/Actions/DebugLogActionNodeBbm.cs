@@ -12,6 +12,11 @@ namespace BossBehaviorMaker.Scripts.Actions
             return "Debug Log";
         }
 
+        public override string NodeDescription()
+        {
+            return "This node will print a debug message to the console.";
+        }
+
         protected override void OnStart()
         {
         }

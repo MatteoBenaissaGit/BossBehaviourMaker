@@ -1,9 +1,7 @@
-﻿
-using BossBehaviorMaker.Scripts.Runtime;
+﻿using BossBehaviorMaker.Scripts.Runtime;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace BossBehaviorMaker.Scripts.Editor
 {
@@ -41,6 +39,7 @@ namespace BossBehaviorMaker.Scripts.Editor
             BossBehaviorMakerEditor.Instance.GetGraphView().CurrentSelectedNodeView = this;
             
             EditorUtility.SetDirty(Node);
+            AssetDatabase.SaveAssets();
         }
 
         public override void OnUnselected()
@@ -51,6 +50,7 @@ namespace BossBehaviorMaker.Scripts.Editor
             BossBehaviorMakerEditor.Instance.GetGraphView().CurrentSelectedNodeView = null;
             
             EditorUtility.SetDirty(Node);
+            AssetDatabase.SaveAssets();
         }
 
         public override void SetPosition(Rect rect)

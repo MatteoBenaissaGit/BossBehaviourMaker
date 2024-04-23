@@ -28,7 +28,7 @@ namespace BossBehaviorMaker.Scripts.Decorators
 
         protected override void OnStart()
         {
-            _currentRepetitions = 0;
+            Reset();
         }
 
         protected override void OnStop()
@@ -63,6 +63,12 @@ namespace BossBehaviorMaker.Scripts.Decorators
             }
 
             return NodeBbmState.Running;
+        }
+
+        public override void Reset()
+        {
+            base.Reset();
+            _currentRepetitions = 0;
         }
     }
 }

@@ -45,6 +45,7 @@ namespace BossBehaviorMaker.Scripts.Runtime
             PlayerTransform = playerTransform;
 
             _tree.Runner = this;
+            _tree.Initialize();
             
             OnStart?.Invoke();
             _isStarted = true;

@@ -1,4 +1,6 @@
-﻿using BossBehaviorMaker.Scripts.Runtime;
+﻿using System;
+using System.Text;
+using BossBehaviorMaker.Scripts.Runtime;
 using UnityEngine;
 
 namespace BossBehaviorMaker.Scripts.Composites
@@ -16,12 +18,27 @@ namespace BossBehaviorMaker.Scripts.Composites
 
         public override string NodeDescription()
         {
-            return "This node will run each child node in order until one of them fails.";
+            StringBuilder nodeOrder = new StringBuilder();
+            if (Children == null || Children.Count <= 0)
+            {
+                nodeOrder.Append("No children");
+            }
+            else
+            {
+                for (int i = 0; i < Children.Count; i++)
+                {
+                    nodeOrder.Append($"{i+1} => {Children[i].ToString()}\n");
+                }
+            }
+            
+            return "This node will run each child node in order until one of them fails.\n" +
+                   "\nNode order :\n" +
+                   $"\n{nodeOrder}";
         }
 
         protected override void OnStart()
         {
-            _current = 0;
+            Reset();
         }
 
         protected override void OnStop()
@@ -30,20 +47,43 @@ namespace BossBehaviorMaker.Scripts.Composites
 
         protected override NodeBbmState OnUpdate()
         {
+            // If the node has no children, return failure.
             if (Children.Count <= 0)
             {
                 Debug.LogWarning("Sequencer Node has no children.");
                 return NodeBbmState.Failure;
             }
             
-            return Children[_current]!.Update() switch
+            // If the current child node is running, keep running it.
+            // If the current child node fails, return failure.
+            // If the current child node succeeds, move to the next child node.
+            NodeBbmState state = Children[_current]!.Update();
+            switch (state)
             {
-                NodeBbmState.Running => NodeBbmState.Running,
-                NodeBbmState.Failure => NodeBbmState.Failure,
-                NodeBbmState.Success => ++_current >= Children.Count ? 
-                    NodeBbmState.Success : NodeBbmState.Running,
-                _ => NodeBbmState.Failure
-            };
+                case NodeBbmState.Running:
+                    return NodeBbmState.Running;
+                case NodeBbmState.Success:
+                    if (_current + 1 >= Children.Count)
+                    {
+                        return NodeBbmState.Success;
+                    }
+                    else
+                    {
+                        //Debug.Log($"seq : {_current}/{Children.Count} => {_current + 1}/{Children.Count}");
+                        _current++;
+                        return NodeBbmState.Running;
+                    }
+                case NodeBbmState.Failure:
+                    return NodeBbmState.Failure;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        public override void Reset()
+        {
+            base.Reset();
+            _current = 0;
         }
     }
 }

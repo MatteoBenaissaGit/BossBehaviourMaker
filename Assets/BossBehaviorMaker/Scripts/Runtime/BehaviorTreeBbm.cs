@@ -6,11 +6,20 @@ namespace BossBehaviorMaker.Scripts.Runtime
     [CreateAssetMenu(fileName = "BehaviourTreeBbm", menuName = "Tools/BehaviourTreeBbm")]
     public class BehaviorTreeBbm : ScriptableObject
     {
-        public NodeBbm RootNode { get; set; }
+        [field:SerializeField] [field:HideInInspector] public NodeBbm RootNode { get; set; }
         public NodeBbm.NodeBbmState TreeState { get; set; } = NodeBbm.NodeBbmState.Running;
-        public List<NodeBbm> Nodes { get; set; } = new List<NodeBbm>();
+        [field:SerializeField] [field:HideInInspector] public List<NodeBbm> Nodes { get; set; } = new List<NodeBbm>();
         public BossBehaviorTreeRunner Runner { get; set; }
 
+        public void Initialize()
+        {
+            foreach (NodeBbm node in Nodes)
+            {
+                node.Reset();
+                node.m_tree = this;
+            }
+        }
+        
         public NodeBbm.NodeBbmState Update()
         {
             if (RootNode == null)

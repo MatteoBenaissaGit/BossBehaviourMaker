@@ -351,6 +351,7 @@ namespace BossBehaviorMaker.Scripts.Editor
 
             EditorUtility.SetDirty(_tree);
             EditorUtility.SetDirty(_tree.RootNode);
+            AssetDatabase.SaveAssets();
         }
     }
 }

@@ -17,6 +17,8 @@ namespace BossBehaviorMaker.Scripts.Runtime
         public string Guid;
         public Vector2 NodeGraphPosition;
         public Vector2 NodeGraphSize;
+
+        public BehaviorTreeBbm m_tree;
         
         [SerializeField] private bool _started;
 
@@ -72,6 +74,11 @@ namespace BossBehaviorMaker.Scripts.Runtime
         {
             List<NodeBbm> children = new List<NodeBbm>();
             return children;
+        }
+
+        public virtual void Reset()
+        {
+            _started = false;
         }
     }
 }

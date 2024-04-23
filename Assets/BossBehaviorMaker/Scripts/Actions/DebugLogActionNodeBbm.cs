@@ -19,6 +19,7 @@ namespace BossBehaviorMaker.Scripts.Actions
 
         protected override void OnStart()
         {
+            Reset();
         }
 
         protected override void OnStop()
@@ -29,6 +30,11 @@ namespace BossBehaviorMaker.Scripts.Actions
         {
             Debug.Log($"{Message}");
             return NodeBbmState.Success;
+        }
+
+        public override void Reset()
+        {
+            base.Reset();
         }
     }
 }

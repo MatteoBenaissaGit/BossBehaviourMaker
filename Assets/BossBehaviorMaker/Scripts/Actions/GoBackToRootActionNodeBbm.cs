@@ -1,25 +1,22 @@
 ﻿using BossBehaviorMaker.Scripts.Runtime;
 using UnityEngine;
 
-namespace BossBehaviorMaker.Scripts.Composites
+namespace BossBehaviorMaker.Scripts.Actions
 {
-    public class SelectorCompositeNodeBbm : CompositeNodeBbm
+    public class GoBackToRootActionNodeBbm : ActionNodeBbm
     {
-        [field:SerializeField] public int NodeToRun { get; set; }
-
         public override string ToString()
         {
-            return "Selector";
+            return "Go back to root";
         }
 
         public override string NodeDescription()
         {
-            return "This node will run each child node in order until one of them succeeds.";
+            return "This node send the current boss behaviour back to the designed node";
         }
 
         protected override void OnStart()
         {
-            Reset();
         }
 
         protected override void OnStop()
@@ -28,11 +25,8 @@ namespace BossBehaviorMaker.Scripts.Composites
 
         protected override NodeBbmState OnUpdate()
         {
-            if (NodeToRun + 1 > Children.Count)
-            {
-                return NodeBbmState.Failure;
-            }
-            return Children[NodeToRun].Update();
+            m_tree.Initialize();
+            return NodeBbmState.Success;
         }
 
         public override void Reset()

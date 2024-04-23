@@ -21,7 +21,7 @@ namespace BossBehaviorMaker.Scripts.Actions
 
         protected override void OnStart()
         {
-            _startTime = Time.time;
+            Reset();
         }
 
         protected override void OnStop()
@@ -31,6 +31,12 @@ namespace BossBehaviorMaker.Scripts.Actions
         protected override NodeBbmState OnUpdate()
         {
             return Time.time - _startTime > Duration ? NodeBbmState.Success : NodeBbmState.Running;
+        }
+
+        public override void Reset()
+        {
+            base.Reset();
+            _startTime = Time.time;
         }
     }
 }

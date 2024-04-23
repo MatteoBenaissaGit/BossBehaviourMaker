@@ -32,6 +32,7 @@ namespace BossBehaviorMaker.Scripts.Editor
             _inspectorPanel.Clear();
             
             Label title = new Label("Node Properties");
+            title.style.marginTop = 8f;
             title.style.unityFontStyleAndWeight = FontStyle.Bold;
             title.style.fontSize = 15;
             
@@ -40,15 +41,27 @@ namespace BossBehaviorMaker.Scripts.Editor
             Label description = new Label($"Select a node to view its properties.");
             _inspectorPanel.Add(description);
             
+            //add a separator
+            VisualElement separator = new VisualElement();
+            separator.style.marginTop = 5;
+            separator.style.marginBottom = 2;
+            separator.style.height = 3;
+            separator.style.backgroundColor = new Color(0.12f, 0.12f, 0.12f);
+            _inspectorPanel.Add(separator);
+            
             BossBehaviorMakerNodeView selectedNode = selection.OfType<BossBehaviorMakerNodeView>().FirstOrDefault();
 
             if (selectedNode != null)
             {
                 Label nodeDescription = new Label($"\n{selectedNode.Node.NodeDescription()}\n");
                 _inspectorPanel.Add(nodeDescription);
+                //make the node description fit into the inspector panel
+                nodeDescription.style.whiteSpace = WhiteSpace.Normal;
+                nodeDescription.style.overflow = Overflow.Visible;
+                
                 
                 PropertyInfo[] properties = selectedNode.Node.GetType().GetProperties();
-                for (int i = 0; i < properties.Length; i++)
+                for (int i = 0; i < properties.Length-3; i++)
                 {
                     PropertyInfo property = properties[i];
 
@@ -59,6 +72,7 @@ namespace BossBehaviorMaker.Scripts.Editor
                             intField.value = (int)property.GetValue(selectedNode.Node);
                             intField.RegisterValueChangedCallback(evt => property.SetValueOptimized(selectedNode.Node, evt.newValue));
                             intField.RegisterValueChangedCallback(evt => EditorUtility.SetDirty(selectedNode.Node));
+                            intField.RegisterValueChangedCallback(evt => AssetDatabase.SaveAssets());
                             _inspectorPanel.Add(intField);
                             break;
 
@@ -67,6 +81,7 @@ namespace BossBehaviorMaker.Scripts.Editor
                             doubleField.value = (double)property.GetValue(selectedNode.Node);
                             doubleField.RegisterValueChangedCallback(evt => property.SetValueOptimized(selectedNode.Node, evt.newValue));
                             doubleField.RegisterValueChangedCallback(evt => EditorUtility.SetDirty(selectedNode.Node));
+                            doubleField.RegisterValueChangedCallback(evt => AssetDatabase.SaveAssets());
                             _inspectorPanel.Add(doubleField);
                             break;
 
@@ -79,6 +94,7 @@ namespace BossBehaviorMaker.Scripts.Editor
                             stringField.value = (string)property.GetValue(selectedNode.Node);
                             stringField.RegisterValueChangedCallback(evt => property.SetValueOptimized(selectedNode.Node, evt.newValue));
                             stringField.RegisterValueChangedCallback(evt => EditorUtility.SetDirty(selectedNode.Node));
+                            stringField.RegisterValueChangedCallback(evt => AssetDatabase.SaveAssets());
                             _inspectorPanel.Add(stringField);
                             break;
 
@@ -87,6 +103,7 @@ namespace BossBehaviorMaker.Scripts.Editor
                             boolField.value = (bool)property.GetValue(selectedNode.Node);
                             boolField.RegisterValueChangedCallback(evt => property.SetValueOptimized(selectedNode.Node, evt.newValue));
                             boolField.RegisterValueChangedCallback(evt => EditorUtility.SetDirty(selectedNode.Node));
+                            boolField.RegisterValueChangedCallback(evt => AssetDatabase.SaveAssets());
                             _inspectorPanel.Add(boolField);
                             break;
 

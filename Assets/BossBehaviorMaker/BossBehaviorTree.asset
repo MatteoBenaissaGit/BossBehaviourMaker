@@ -1,5 +1,40 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9171214265420123554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de04b17d060a444cbccb0318855edf6a, type: 3}
+  m_Name: GoBackToNodeActionNodeBbm
+  m_EditorClassIdentifier: 
+  Guid: ac3ea5b9d2b0f6048a919a1e86edc1c9
+  NodeGraphPosition: {x: -90.692535, y: 161.98407}
+  NodeGraphSize: {x: 135, y: 77}
+  m_tree: {fileID: 11400000}
+  _started: 0
+--- !u!114 &-6129894015481582578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c000a6f096d44398bb08401705a8d4f, type: 3}
+  m_Name: DebugLogActionNodeBbm
+  m_EditorClassIdentifier: 
+  Guid: 3b647f6fd0be88548994db0df134455f
+  NodeGraphPosition: {x: -64, y: -111.000015}
+  NodeGraphSize: {x: 108, y: 77}
+  m_tree: {fileID: 11400000}
+  _started: 0
+  <Message>k__BackingField: Start tree
 --- !u!114 &-4211029592526439721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,10 +48,11 @@ MonoBehaviour:
   m_Name: WaitActionNodeBbm
   m_EditorClassIdentifier: 
   Guid: e9aaa63ee206afb4d990ba8e4c577051
-  NodeGraphPosition: {x: 304, y: 116}
+  NodeGraphPosition: {x: 358.3074, y: 247.98407}
   NodeGraphSize: {x: 72, y: 77}
-  _started: 0
-  <Duration>k__BackingField: 0
+  m_tree: {fileID: 11400000}
+  _started: 1
+  <Duration>k__BackingField: 1
 --- !u!114 &-3425488535070576349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30,12 +66,34 @@ MonoBehaviour:
   m_Name: SequencerCompositeNodeBbm
   m_EditorClassIdentifier: 
   Guid: 35d7211a856bc1045994441092f62abe
-  NodeGraphPosition: {x: 71.30001, y: 87.40002}
-  NodeGraphSize: {x: 225, y: 77}
-  _started: 0
+  NodeGraphPosition: {x: 137.30745, y: 122.984055}
+  NodeGraphSize: {x: 136, y: 77}
+  m_tree: {fileID: 11400000}
+  _started: 1
   Children:
   - {fileID: 6692303263494451620}
   - {fileID: -4211029592526439721}
+--- !u!114 &-2425772832569766445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fa1c7c50d964b6bbb02b1f0ade9f089, type: 3}
+  m_Name: SequencerCompositeNodeBbm
+  m_EditorClassIdentifier: 
+  Guid: cef51ac821c3e4b47a2a6023a78d1152
+  NodeGraphPosition: {x: -336.6926, y: -34.015945}
+  NodeGraphSize: {x: 153, y: 87}
+  m_tree: {fileID: 11400000}
+  _started: 1
+  Children:
+  - {fileID: -6129894015481582578}
+  - {fileID: 3329283898660450113}
+  - {fileID: -9171214265420123554}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,6 +106,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6421cfed914d8d96adff46db098d29, type: 3}
   m_Name: BossBehaviorTree
   m_EditorClassIdentifier: 
+  <RootNode>k__BackingField: {fileID: -2425772832569766445}
+  <Nodes>k__BackingField:
+  - {fileID: -6129894015481582578}
+  - {fileID: 6692303263494451620}
+  - {fileID: -9171214265420123554}
+  - {fileID: 3329283898660450113}
+  - {fileID: -2425772832569766445}
+  - {fileID: -3425488535070576349}
+  - {fileID: -4211029592526439721}
 --- !u!114 &3329283898660450113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,11 +128,12 @@ MonoBehaviour:
   m_Name: RepeatDecoratorNodeBbm
   m_EditorClassIdentifier: 
   Guid: 3be268ccecbed62438869b72350ff829
-  NodeGraphPosition: {x: -148, y: 58}
+  NodeGraphPosition: {x: -63.692535, y: 16.984055}
   NodeGraphSize: {x: 136, y: 77}
-  _started: 0
+  m_tree: {fileID: 11400000}
+  _started: 1
   Child: {fileID: -3425488535070576349}
-  <NumberOfRepetitions>k__BackingField: 8
+  <NumberOfRepetitions>k__BackingField: 4
 --- !u!114 &6692303263494451620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,7 +147,8 @@ MonoBehaviour:
   m_Name: DebugLogActionNodeBbm
   m_EditorClassIdentifier: 
   Guid: 923ef8d1c3e53a445818aa62905f7284
-  NodeGraphPosition: {x: 304, y: 202}
+  NodeGraphPosition: {x: 358.3074, y: 161.98407}
   NodeGraphSize: {x: 108, y: 77}
+  m_tree: {fileID: 11400000}
   _started: 0
   <Message>k__BackingField: Please boss don't kill me !

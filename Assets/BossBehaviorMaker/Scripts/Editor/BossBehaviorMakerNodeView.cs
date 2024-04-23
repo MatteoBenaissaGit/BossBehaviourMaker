@@ -1,5 +1,6 @@
 ﻿
 using BossBehaviorMaker.Scripts.Runtime;
+using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -35,15 +36,21 @@ namespace BossBehaviorMaker.Scripts.Editor
         public override void OnSelected()
         {
             base.OnSelected();
+            
             BossBehaviorMakerEditor.Instance.GetGraphView().UpdateInspectorPanel();
             BossBehaviorMakerEditor.Instance.GetGraphView().CurrentSelectedNodeView = this;
+            
+            EditorUtility.SetDirty(Node);
         }
 
         public override void OnUnselected()
         {
             base.OnUnselected();
+            
             BossBehaviorMakerEditor.Instance.GetGraphView().UpdateInspectorPanel();
             BossBehaviorMakerEditor.Instance.GetGraphView().CurrentSelectedNodeView = null;
+            
+            EditorUtility.SetDirty(Node);
         }
 
         public override void SetPosition(Rect rect)

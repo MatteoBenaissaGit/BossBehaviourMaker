@@ -348,6 +348,9 @@ namespace BossBehaviorMaker.Scripts.Editor
             RootNodeView.SetAsRoot(true);
             
             _tree.RootNode = RootNodeView.Node;
+
+            EditorUtility.SetDirty(_tree);
+            EditorUtility.SetDirty(_tree.RootNode);
         }
     }
 }

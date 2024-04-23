@@ -5,7 +5,7 @@ namespace BossBehaviorMaker.Scripts.Actions
 {
     public class WaitActionNodeBbm : ActionNodeBbm
     {
-        [SerializeField] public double Duration;
+        [field:SerializeField] public double Duration { get; set; }
 
         private float _startTime;
 

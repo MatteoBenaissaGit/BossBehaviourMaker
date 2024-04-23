@@ -5,7 +5,7 @@ namespace BossBehaviorMaker.Scripts.Composites
 {
     public class SelectorCompositeNodeBbm : CompositeNodeBbm
     {
-        [SerializeField] public int NodeToRun = 0;
+        [field:SerializeField] public int NodeToRun { get; set; }
 
         public override string ToString()
         {

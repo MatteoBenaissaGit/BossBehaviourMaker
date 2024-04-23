@@ -11,7 +11,8 @@ namespace BossBehaviorMaker.Scripts.Decorators
         /// -1 let the node run until success.
         /// -2 let the node run until failure.
         /// </summary>
-        [SerializeField] public int NumberOfRepetitions = -1;
+        [Tooltip("-1 let the node run until success.\n-2 let the node run until failure.")]
+        [SerializeField] public int NumberOfRepetitions;
 
         private int _currentRepetitions;
 

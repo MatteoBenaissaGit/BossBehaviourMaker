@@ -171,7 +171,7 @@ namespace BossBehaviorMaker.Scripts.Editor
             _tree.Nodes.Remove(null);
             
             //add nodes
-            _tree.Nodes.ForEach(CreateNodeView);
+            _tree.Nodes.ForEach(node => CreateNodeView(node));
 
             //aad edges
             foreach (NodeBbm node in _tree.Nodes)
@@ -245,17 +245,23 @@ namespace BossBehaviorMaker.Scripts.Editor
             inspectorPanel.OnSelectionChanged(selectedElements);
         }
 
-        private void CreateNodeView(NodeBbm node)
+        private BossBehaviorMakerNodeView CreateNodeView(NodeBbm node)
         {
+            node.m_tree = _tree;
+            
             BossBehaviorMakerNodeView nodeView = new BossBehaviorMakerNodeView(node);
             Rect rect = new Rect(node.NodeGraphPosition, node.NodeGraphSize);
+            
             AddElement(nodeView);
             nodeView.SetPosition(rect);
+            
             if (nodeView.Node == _tree.RootNode)
             {
                 nodeView.SetAsRoot(true);
                 RootNodeView = nodeView;
             }
+
+            return nodeView;
         }
 
         private void CreateNode(System.Type type)
@@ -268,9 +274,9 @@ namespace BossBehaviorMaker.Scripts.Editor
             NodeBbm node = ScriptableObject.CreateInstance(type) as NodeBbm;
             node.name = type.Name;
             node.Guid = GUID.Generate().ToString();
-
+            
             _tree.Nodes.Add(node);
-            CreateNodeView(node);
+            BossBehaviorMakerNodeView nodeView = CreateNodeView(node);
 
             if (_tree.RootNode == null)
             {

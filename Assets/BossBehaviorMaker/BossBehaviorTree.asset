@@ -48,10 +48,10 @@ MonoBehaviour:
   m_Name: WaitActionNodeBbm
   m_EditorClassIdentifier: 
   Guid: e9aaa63ee206afb4d990ba8e4c577051
-  NodeGraphPosition: {x: 358.3074, y: 247.98407}
-  NodeGraphSize: {x: 72, y: 77}
+  NodeGraphPosition: {x: 747, y: 435}
+  NodeGraphSize: {x: 87, y: 77}
   m_tree: {fileID: 11400000}
-  _started: 1
+  _started: 0
   <Duration>k__BackingField: 1
 --- !u!114 &-3425488535070576349
 MonoBehaviour:
@@ -66,13 +66,16 @@ MonoBehaviour:
   m_Name: SequencerCompositeNodeBbm
   m_EditorClassIdentifier: 
   Guid: 35d7211a856bc1045994441092f62abe
-  NodeGraphPosition: {x: 137.30745, y: 122.984055}
+  NodeGraphPosition: {x: 134.52087, y: 123.49998}
   NodeGraphSize: {x: 136, y: 77}
   m_tree: {fileID: 11400000}
   _started: 1
   Children:
   - {fileID: 6692303263494451620}
-  - {fileID: -4211029592526439721}
+  - {fileID: 5815800975742508683}
+  - {fileID: 7425133482601426716}
+  - {fileID: -524176937532825758}
+  <SequenceName>k__BackingField: Simple Run Attack
 --- !u!114 &-2425772832569766445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +97,30 @@ MonoBehaviour:
   - {fileID: -6129894015481582578}
   - {fileID: 3329283898660450113}
   - {fileID: -9171214265420123554}
+  <SequenceName>k__BackingField: 
+--- !u!114 &-524176937532825758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fa1c7c50d964b6bbb02b1f0ade9f089, type: 3}
+  m_Name: SequencerCompositeNodeBbm
+  m_EditorClassIdentifier: 
+  Guid: 8e07386d35663a743a071208ca2173dc
+  NodeGraphPosition: {x: 444.7013, y: 512.2509}
+  NodeGraphSize: {x: 136, y: 77}
+  m_tree: {fileID: 11400000}
+  _started: 0
+  Children:
+  - {fileID: -4211029592526439721}
+  - {fileID: 1502112056034363078}
+  - {fileID: 1605605522091605080}
+  - {fileID: 2754155090282917021}
+  <SequenceName>k__BackingField: Run fast and attack
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,6 +142,67 @@ MonoBehaviour:
   - {fileID: -2425772832569766445}
   - {fileID: -3425488535070576349}
   - {fileID: -4211029592526439721}
+  - {fileID: 5815800975742508683}
+  - {fileID: 1502112056034363078}
+  - {fileID: 2754155090282917021}
+  - {fileID: 7425133482601426716}
+  - {fileID: -524176937532825758}
+  - {fileID: 1605605522091605080}
+--- !u!114 &1502112056034363078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29fe81f9eba5476996c5d865e19d8412, type: 3}
+  m_Name: WalkTowardPlayerActionNodeBbm
+  m_EditorClassIdentifier: 
+  Guid: 2e8b643e5534f584f81f9cda61421b35
+  NodeGraphPosition: {x: 745, y: 527}
+  NodeGraphSize: {x: 254, y: 77}
+  m_tree: {fileID: 11400000}
+  _started: 0
+  <Duration>k__BackingField: 1
+  <Speed>k__BackingField: 4
+--- !u!114 &1605605522091605080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b3c958f4f1a421e809a5c3937fad7e5, type: 3}
+  m_Name: AttackActionNodeBbm
+  m_EditorClassIdentifier: 
+  Guid: f75a75ba2e19c6247a1685c98fd09326
+  NodeGraphPosition: {x: 747, y: 613}
+  NodeGraphSize: {x: 137, y: 77}
+  m_tree: {fileID: 11400000}
+  _started: 0
+  <AttackIndex>k__BackingField: 0
+--- !u!114 &2754155090282917021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8a8872797ea48619edea2d0e25166fa, type: 3}
+  m_Name: WaitActionNodeBbm
+  m_EditorClassIdentifier: 
+  Guid: 6c357555508edb3488924851ca9597bf
+  NodeGraphPosition: {x: 747, y: 702}
+  NodeGraphSize: {x: 89, y: 77}
+  m_tree: {fileID: 11400000}
+  _started: 0
+  <Duration>k__BackingField: 2
 --- !u!114 &3329283898660450113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,6 +222,25 @@ MonoBehaviour:
   _started: 1
   Child: {fileID: -3425488535070576349}
   <NumberOfRepetitions>k__BackingField: 4
+--- !u!114 &5815800975742508683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29fe81f9eba5476996c5d865e19d8412, type: 3}
+  m_Name: WalkTowardPlayerActionNodeBbm
+  m_EditorClassIdentifier: 
+  Guid: 44ffdfd88ad1bff46901c48d1daf6908
+  NodeGraphPosition: {x: 443.70132, y: 246.25099}
+  NodeGraphSize: {x: 256, y: 77}
+  m_tree: {fileID: 11400000}
+  _started: 0
+  <Duration>k__BackingField: 3
+  <Speed>k__BackingField: 2
 --- !u!114 &6692303263494451620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,8 +254,26 @@ MonoBehaviour:
   m_Name: DebugLogActionNodeBbm
   m_EditorClassIdentifier: 
   Guid: 923ef8d1c3e53a445818aa62905f7284
-  NodeGraphPosition: {x: 358.3074, y: 161.98407}
-  NodeGraphSize: {x: 108, y: 77}
+  NodeGraphPosition: {x: 443.70132, y: 147.25099}
+  NodeGraphSize: {x: 161, y: 77}
   m_tree: {fileID: 11400000}
   _started: 0
-  <Message>k__BackingField: Please boss don't kill me !
+  <Message>k__BackingField: Run to player
+--- !u!114 &7425133482601426716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b3c958f4f1a421e809a5c3937fad7e5, type: 3}
+  m_Name: AttackActionNodeBbm
+  m_EditorClassIdentifier: 
+  Guid: 55ae83cd0346d1742840531db5b1a8da
+  NodeGraphPosition: {x: 443.70132, y: 343.25098}
+  NodeGraphSize: {x: 137, y: 77}
+  m_tree: {fileID: 11400000}
+  _started: 0
+  <AttackIndex>k__BackingField: 0

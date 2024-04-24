@@ -43,7 +43,7 @@ namespace BossBehaviorMaker.GameplayDemoElements.Projectiles
 
             if (collision.gameObject.TryGetComponent(out IAttackReceiver attackReceiver))
             {
-                attackReceiver.TakeDamageFrom(this, _damage);
+                attackReceiver.TakeDamageFrom(this.gameObject, _damage);
             }
             Destroy(gameObject);
         }

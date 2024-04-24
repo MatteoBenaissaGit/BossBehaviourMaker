@@ -1,7 +1,9 @@
-﻿namespace BossBehaviorMaker.GameplayDemoElements.Projectiles
+﻿using UnityEngine;
+
+namespace BossBehaviorMaker.GameplayDemoElements.Projectiles
 {
     public interface IAttackReceiver
     {
-        public void TakeDamageFrom(Projectile projectile, int damage);
+        public void TakeDamageFrom(GameObject attacker, int damage);
     }
 }

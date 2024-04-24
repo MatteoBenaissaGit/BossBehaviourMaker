@@ -71,8 +71,7 @@ namespace BossBehaviorMaker.Scripts.Editor
                             IntegerField intField = new IntegerField(property.Name);
                             intField.value = (int)property.GetValue(selectedNode.Node);
                             intField.RegisterValueChangedCallback(evt => property.SetValueOptimized(selectedNode.Node, evt.newValue));
-                            intField.RegisterValueChangedCallback(evt => EditorUtility.SetDirty(selectedNode.Node));
-                            intField.RegisterValueChangedCallback(evt => AssetDatabase.SaveAssets());
+                            intField.RegisterValueChangedCallback(evt => SetNodeChanged(selectedNode));
                             _inspectorPanel.Add(intField);
                             break;
 
@@ -80,8 +79,7 @@ namespace BossBehaviorMaker.Scripts.Editor
                             DoubleField doubleField = new DoubleField(property.Name);
                             doubleField.value = (double)property.GetValue(selectedNode.Node);
                             doubleField.RegisterValueChangedCallback(evt => property.SetValueOptimized(selectedNode.Node, evt.newValue));
-                            doubleField.RegisterValueChangedCallback(evt => EditorUtility.SetDirty(selectedNode.Node));
-                            doubleField.RegisterValueChangedCallback(evt => AssetDatabase.SaveAssets());
+                            doubleField.RegisterValueChangedCallback(evt => SetNodeChanged(selectedNode));
                             _inspectorPanel.Add(doubleField);
                             break;
 
@@ -93,8 +91,7 @@ namespace BossBehaviorMaker.Scripts.Editor
                             TextField stringField = new TextField(property.Name);
                             stringField.value = (string)property.GetValue(selectedNode.Node);
                             stringField.RegisterValueChangedCallback(evt => property.SetValueOptimized(selectedNode.Node, evt.newValue));
-                            stringField.RegisterValueChangedCallback(evt => EditorUtility.SetDirty(selectedNode.Node));
-                            stringField.RegisterValueChangedCallback(evt => AssetDatabase.SaveAssets());
+                            stringField.RegisterValueChangedCallback(evt => SetNodeChanged(selectedNode));
                             _inspectorPanel.Add(stringField);
                             break;
 
@@ -102,8 +99,7 @@ namespace BossBehaviorMaker.Scripts.Editor
                             Toggle boolField = new Toggle(property.Name);
                             boolField.value = (bool)property.GetValue(selectedNode.Node);
                             boolField.RegisterValueChangedCallback(evt => property.SetValueOptimized(selectedNode.Node, evt.newValue));
-                            boolField.RegisterValueChangedCallback(evt => EditorUtility.SetDirty(selectedNode.Node));
-                            boolField.RegisterValueChangedCallback(evt => AssetDatabase.SaveAssets());
+                            boolField.RegisterValueChangedCallback(evt => SetNodeChanged(selectedNode));
                             _inspectorPanel.Add(boolField);
                             break;
 
@@ -115,6 +111,13 @@ namespace BossBehaviorMaker.Scripts.Editor
                     }
                 }
             }
+        }
+        
+        private void SetNodeChanged(BossBehaviorMakerNodeView selectedNode)
+        {
+            selectedNode.UpdateTitle();
+            EditorUtility.SetDirty(selectedNode.Node);
+            AssetDatabase.SaveAssets();
         }
     }
 }

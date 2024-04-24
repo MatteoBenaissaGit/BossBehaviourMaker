@@ -18,7 +18,7 @@ namespace BossBehaviorMaker.Scripts.Decorators
 
         public override string ToString()
         {
-            return "Repeat";
+            return $"Repeat {NumberOfRepetitions} times";
         }
 
         public override string NodeDescription()

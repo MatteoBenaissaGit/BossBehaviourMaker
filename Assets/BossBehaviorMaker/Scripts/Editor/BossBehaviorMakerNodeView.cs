@@ -37,9 +37,6 @@ namespace BossBehaviorMaker.Scripts.Editor
             
             BossBehaviorMakerEditor.Instance.GetGraphView().UpdateInspectorPanel();
             BossBehaviorMakerEditor.Instance.GetGraphView().CurrentSelectedNodeView = this;
-            
-            EditorUtility.SetDirty(Node);
-            AssetDatabase.SaveAssets();
         }
 
         public override void OnUnselected()
@@ -142,6 +139,11 @@ namespace BossBehaviorMaker.Scripts.Editor
             style.borderTopWidth = isRoot ? 5 : 1;
             
             title = isRoot ? title + " (ROOT)" : title.Substring(0, title.Length - 7);
+        }
+        
+        public void UpdateTitle()
+        {
+            title = Node.ToString();
         }
     }
 }

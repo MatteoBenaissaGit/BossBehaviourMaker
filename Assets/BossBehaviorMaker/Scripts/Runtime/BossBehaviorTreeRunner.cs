@@ -17,8 +17,8 @@ namespace BossBehaviorMaker.Scripts.Runtime
         // Events, subscribe to them in your boss controller script to get Events from the tree
         public Action OnStart { get; set; }
         public Action OnIdle { get; set; }
-        public Action OnWalkTowardPlayer { get; set; }
-        public Action OnAttack { get; set; }
+        public Action<float, float> OnWalkTowardPlayerForSecondsAtSpeed { get; set; }
+        public Action<int> OnAttackIndex { get; set; }
         public Action OnDie { get; set; }
 
         // References to player and boss value, update them from your boss controller

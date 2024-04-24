@@ -7,13 +7,13 @@ namespace BossBehaviorMaker.Scripts.Composites
 {
     public class SequencerCompositeNodeBbm : CompositeNodeBbm
     {
-        //TODO set up child order
+        [field:SerializeField] public string SequenceName { get; set; }
         
         private int _current;
 
         public override string ToString()
         {
-            return "Sequencer";
+            return $"{(SequenceName.Length <= 0 ? "Sequencer" : "Sequence : " + SequenceName)}";
         }
 
         public override string NodeDescription()

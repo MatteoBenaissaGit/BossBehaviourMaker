@@ -3,18 +3,18 @@ using UnityEngine;
 
 namespace BossBehaviorMaker.Scripts.Actions
 {
-    public class DebugLogActionNodeBbm : ActionNodeBbm
+    public class AttackActionNodeBbm : ActionNodeBbm
     {
-        [field:SerializeField] public string Message { get; set; }
-
+        [field:SerializeField] public int AttackIndex { get; set; } 
+        
         public override string ToString()
         {
-            return $"Debug Log \"{(Message.Length >= 5 ? Message.Substring(0,5) + "..." : Message)}\"";
+            return $"Attack (index:{AttackIndex})";
         }
 
         public override string NodeDescription()
         {
-            return "This node will print a debug message to the console.";
+            return "This node will launch the attack event with the set attack index parameter";
         }
 
         protected override void OnStart()
@@ -28,7 +28,7 @@ namespace BossBehaviorMaker.Scripts.Actions
 
         protected override NodeBbmState OnUpdate()
         {
-            Debug.Log($"{Message}");
+            m_tree.Runner.OnAttackIndex?.Invoke(AttackIndex);
             return NodeBbmState.Success;
         }
 

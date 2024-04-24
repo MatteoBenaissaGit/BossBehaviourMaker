@@ -1,5 +1,8 @@
 using System;
+using System.Threading.Tasks;
+using BossBehaviorMaker.GameplayDemoElements.Projectiles;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace BossBehaviorMaker.GameplayDemoElements.Character
 {
@@ -12,11 +15,15 @@ namespace BossBehaviorMaker.GameplayDemoElements.Character
         [field:SerializeField] public KeyCode DownInput { get; private set; }
     }
     
-    public class TopDownCharacterController : MonoBehaviour
+    public class TopDownCharacterController : MonoBehaviour, IAttackReceiver
     {
+        public bool CanWalk { get; set; } = true;
+        
+        [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private InputKeyCodes _inputs;
         [SerializeField] private Animator _animator;
         [SerializeField] private float _characterSpeed = 10f;
+        [SerializeField] private ParticleSystem _deathParticle;
         
         private Camera _camera;
 
@@ -42,6 +49,11 @@ namespace BossBehaviorMaker.GameplayDemoElements.Character
 
         private void Move(Vector2 inputVector)
         {
+            if (CanWalk == false)
+            {
+                return;
+            }
+            
             //get the normalized world vector
             Vector2 inputVectorNormalized = inputVector.normalized;
             Vector3 worldVector = new Vector3(inputVectorNormalized.x, 0, inputVectorNormalized.y) * (_characterSpeed * Time.deltaTime);
@@ -61,6 +73,28 @@ namespace BossBehaviorMaker.GameplayDemoElements.Character
 
             //animate
             _animator.SetBool("IsWalking", inputVector.magnitude > 0.1f);
+        }
+
+        public void TakeDamageFrom(GameObject attacker, int damage)
+        {
+            if (attacker == gameObject)
+            {
+                return;
+            }
+            Die();
+        }
+
+        private async void Die()
+        {
+            CanWalk = false;
+            
+            _deathParticle.Play();
+            _deathParticle.transform.parent = null;
+            
+            gameObject.SetActive(false);
+            
+            await Task.Delay(1500);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

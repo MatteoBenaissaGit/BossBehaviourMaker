@@ -11,7 +11,7 @@ namespace BossBehaviorMaker.Scripts.Actions
 
         public override string ToString()
         {
-            return "Wait";
+            return $"Wait {Duration}s";
         }
 
         public override string NodeDescription()

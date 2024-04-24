@@ -130,6 +130,11 @@ MonoBehaviour:
   _lifeBar: {fileID: 3749037100105163747}
   _lifeText: {fileID: 4050138279325174225}
   _player: {fileID: 0}
+  _bossAnimator: {fileID: 4788162677913952952}
+  _punchAttackDamage: 1
+  _punchAttackDistance: 1.17
+  _punchAttackRadius: 1.14
+  _punchAttackCastTime: 0.5
 --- !u!114 &2439849031369645732
 MonoBehaviour:
   m_ObjectHideFlags: 0

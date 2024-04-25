@@ -70,7 +70,7 @@ namespace BossBehaviorMaker.Scripts.Editor
             }
 
             InputPort.portName = "Input";
-            InputPort.portColor = new Color(0.42f, 1f, 0.36f);
+            InputPort.portColor = Color.white;
             inputContainer.Add(InputPort);
         }
 
@@ -94,36 +94,24 @@ namespace BossBehaviorMaker.Scripts.Editor
             }
 
             OutputPort.portName = "Output";
-            OutputPort.portColor = new Color(1f, 0.4f, 0.45f);
+            OutputPort.portColor = Color.white;
             outputContainer.Add(OutputPort);
         }
 
         private void SetColor()
         {
-            Color color = Color.white;
-            switch (Node)
+            Color color = Node switch
             {
-                case ActionNodeBbm :
-                    color = new Color(1f, 0.94f, 0f, 0.25f);
-                    style.backgroundColor = color;
-                    elementTypeColor = new Color(color.r,color.g,color.b,1);
-                    break;
-                case CompositeNodeBbm :
-                    color = new Color(0.32f, 1f, 0f, 0.25f);
-                    style.backgroundColor = color;
-                    elementTypeColor = new Color(color.r,color.g,color.b,1);
-                    break;
-                case IfBossLife :
-                    color = new Color(0.16f, 0.27f, 1f, 0.31f);
-                    style.backgroundColor = color;
-                    elementTypeColor = new Color(color.r,color.g,color.b,0.5f);
-                    break;
-                case DecoratorNodeBbm :
-                    color = new Color(1f, 0.45f, 0f, 0.25f);
-                    style.backgroundColor = color;
-                    elementTypeColor = new Color(color.r,color.g,color.b,0.5f);
-                    break;
-            }
+                ActionNodeBbm => new Color(1f, 0.94f, 0f, 1f),
+                CompositeNodeBbm => new Color(0.32f, 1f, 0f, 1f),
+                IfBossLife => new Color(0.16f, 0.27f, 1f, 1f),
+                DecoratorNodeBbm => new Color(1f, 0.45f, 0f, 1f),
+                _ => Color.white
+            };
+
+            style.borderTopColor = color;
+            style.borderTopWidth = 6f;
+            elementTypeColor = color;
 
             style.borderBottomLeftRadius = 10;
             style.borderBottomRightRadius = 10;
@@ -141,8 +129,12 @@ namespace BossBehaviorMaker.Scripts.Editor
 
             _isRoot = isRoot;
             
-            style.borderBottomWidth = isRoot ? 5 : 1;
-            style.borderTopWidth = isRoot ? 5 : 1;
+            style.borderBottomWidth = isRoot ? 5 : 0;
+            style.borderBottomColor = Color.white;
+            style.borderLeftWidth = isRoot ? 5 : 0;
+            style.borderLeftColor = Color.white;
+            style.borderRightWidth = isRoot ? 5 : 0;
+            style.borderRightColor = Color.white;
             
             title = isRoot ? title + " (ROOT)" : title.Substring(0, title.Length - 7);
         }

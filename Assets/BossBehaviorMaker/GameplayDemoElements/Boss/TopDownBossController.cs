@@ -123,7 +123,7 @@ namespace BossBehaviorMaker.GameplayDemoElements.Boss
                         _punchAttackRadius, 
                         transform.forward,
                         _hits, 
-                        float.MaxValue);
+                        0);
                     for (int i = 0; i < hits; i++)
                     {
                         if (_hits[i].collider.TryGetComponent(out IAttackReceiver attackReceiver))

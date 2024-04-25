@@ -30,7 +30,7 @@ MonoBehaviour:
   m_Name: IfBossLife
   m_EditorClassIdentifier: 
   Guid: ca5d3db69bfaa2948b1c812503e2206f
-  NodeGraphPosition: {x: 1110, y: 206}
+  NodeGraphPosition: {x: 944.6598, y: 136.50003}
   NodeGraphSize: {x: 178, y: 77}
   m_tree: {fileID: 11400000}
   _started: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Name: Repeat
   m_EditorClassIdentifier: 
   Guid: be706bd515d7fd0438707e8295622d42
-  NodeGraphPosition: {x: 1006.95624, y: 516.99994}
+  NodeGraphPosition: {x: 841.65967, y: 447.50003}
   NodeGraphSize: {x: 136, y: 77}
   m_tree: {fileID: 11400000}
   _started: 0
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Name: Wait
   m_EditorClassIdentifier: 
   Guid: ea4bc190646c8574eb9b6cae971e8893
-  NodeGraphPosition: {x: 2035.7264, y: 227.5}
+  NodeGraphPosition: {x: 1870.6598, y: 158.50006}
   NodeGraphSize: {x: 87, y: 77}
   m_tree: {fileID: 11400000}
   _started: 0
@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Name: SequencerCompositeNodeBbm
   m_EditorClassIdentifier: 
   Guid: 35d7211a856bc1045994441092f62abe
-  NodeGraphPosition: {x: 1654.7264, y: 27.50003}
+  NodeGraphPosition: {x: 1489.6597, y: -41.49993}
   NodeGraphSize: {x: 217, y: 77}
   m_tree: {fileID: 11400000}
   _started: 0
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: SequencerCompositeNodeBbm
   m_EditorClassIdentifier: 
   Guid: e97195f1c2f5bb1489ba26de423cdc6e
-  NodeGraphPosition: {x: 1188.0002, y: 632}
+  NodeGraphPosition: {x: 1022.6598, y: 562.50006}
   NodeGraphSize: {x: 202, y: 77}
   m_tree: {fileID: 11400000}
   _started: 1
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Name: SequencerCompositeNodeBbm
   m_EditorClassIdentifier: 
   Guid: 8e07386d35663a743a071208ca2173dc
-  NodeGraphPosition: {x: 1631.4999, y: 317}
+  NodeGraphPosition: {x: 1466.6597, y: 247.50003}
   NodeGraphSize: {x: 223, y: 77}
   m_tree: {fileID: 11400000}
   _started: 0
@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Name: IfBossLife
   m_EditorClassIdentifier: 
   Guid: c5301b9587acdf648bb28a907a3d5f74
-  NodeGraphPosition: {x: 1110, y: 104.500015}
+  NodeGraphPosition: {x: 944.6598, y: 35.5001}
   NodeGraphSize: {x: 254, y: 77}
   m_tree: {fileID: 11400000}
   _started: 0
@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Name: WalkTowardPlayerActionNodeBbm
   m_EditorClassIdentifier: 
   Guid: 2e8b643e5534f584f81f9cda61421b35
-  NodeGraphPosition: {x: 1995.9999, y: 450.837}
+  NodeGraphPosition: {x: 1830.6598, y: 381.5}
   NodeGraphSize: {x: 254, y: 77}
   m_tree: {fileID: 11400000}
   _started: 0
@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Name: AttackActionNodeBbm
   m_EditorClassIdentifier: 
   Guid: 318bb0a631b1a8740842057e88bcf0f2
-  NodeGraphPosition: {x: 1559.0001, y: 792}
+  NodeGraphPosition: {x: 1393.6597, y: 722.5}
   NodeGraphSize: {x: 135, y: 77}
   m_tree: {fileID: 11400000}
   _started: 0
@@ -284,7 +284,7 @@ MonoBehaviour:
   m_Name: AttackActionNodeBbm
   m_EditorClassIdentifier: 
   Guid: f75a75ba2e19c6247a1685c98fd09326
-  NodeGraphPosition: {x: 1995.9999, y: 545.83704}
+  NodeGraphPosition: {x: 1830.6598, y: 476.50003}
   NodeGraphSize: {x: 137, y: 77}
   m_tree: {fileID: 11400000}
   _started: 0
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Name: WaitActionNodeBbm
   m_EditorClassIdentifier: 
   Guid: debbca268a9fef942aa19cf7652c60af
-  NodeGraphPosition: {x: 1559.0001, y: 693}
+  NodeGraphPosition: {x: 1393.6597, y: 623.50006}
   NodeGraphSize: {x: 100, y: 77}
   m_tree: {fileID: 11400000}
   _started: 0
@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Name: SequencerCompositeNodeBbm
   m_EditorClassIdentifier: 
   Guid: d956780c69d01a543bc81e9ae17adf96
-  NodeGraphPosition: {x: 757.32556, y: 142.99998}
+  NodeGraphPosition: {x: 591.6597, y: 73.5001}
   NodeGraphSize: {x: 136, y: 77}
   m_tree: {fileID: 11400000}
   _started: 1
@@ -342,7 +342,7 @@ MonoBehaviour:
   m_Name: WaitActionNodeBbm
   m_EditorClassIdentifier: 
   Guid: 6c357555508edb3488924851ca9597bf
-  NodeGraphPosition: {x: 1995.9999, y: 636.83704}
+  NodeGraphPosition: {x: 1830.6598, y: 567.5}
   NodeGraphSize: {x: 87, y: 77}
   m_tree: {fileID: 11400000}
   _started: 0
@@ -379,7 +379,7 @@ MonoBehaviour:
   m_Name: LookTowardPlayer
   m_EditorClassIdentifier: 
   Guid: a4b199223bff7ac4da65cc905feb3e86
-  NodeGraphPosition: {x: 1559.0001, y: 594}
+  NodeGraphPosition: {x: 1393.6597, y: 524.50006}
   NodeGraphSize: {x: 158, y: 77}
   m_tree: {fileID: 11400000}
   _started: 1
@@ -397,7 +397,7 @@ MonoBehaviour:
   m_Name: WalkTowardPlayerActionNodeBbm
   m_EditorClassIdentifier: 
   Guid: 44ffdfd88ad1bff46901c48d1daf6908
-  NodeGraphPosition: {x: 2035.7264, y: 27.50003}
+  NodeGraphPosition: {x: 1870.6598, y: -41.49993}
   NodeGraphSize: {x: 256, y: 77}
   m_tree: {fileID: 11400000}
   _started: 0
@@ -416,7 +416,7 @@ MonoBehaviour:
   m_Name: AttackActionNodeBbm
   m_EditorClassIdentifier: 
   Guid: 55ae83cd0346d1742840531db5b1a8da
-  NodeGraphPosition: {x: 2035.7264, y: 128.50003}
+  NodeGraphPosition: {x: 1870.6598, y: 59.5001}
   NodeGraphSize: {x: 137, y: 77}
   m_tree: {fileID: 11400000}
   _started: 0

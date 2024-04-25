@@ -5,6 +5,7 @@ using BossBehaviorMaker.GameplayDemoElements.Projectiles;
 using BossBehaviorMaker.Scripts.Runtime;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace BossBehaviorMaker.GameplayDemoElements.Boss
@@ -18,6 +19,7 @@ namespace BossBehaviorMaker.GameplayDemoElements.Boss
         [SerializeField] private TMP_Text _lifeText;
         [SerializeField] private TopDownCharacterController _player;
         [SerializeField] private Animator _bossAnimator;
+        [SerializeField] private ParticleSystem _deathParticle;
 
         [Header("Punch attack Parameters") ,SerializeField] private int _punchAttackDamage;
         [SerializeField] private float _punchAttackDistance;
@@ -78,6 +80,23 @@ namespace BossBehaviorMaker.GameplayDemoElements.Boss
             
             _life -= damage;
             UpdateLife();
+            if (_life <= 0)
+            {
+                Die();
+            }
+        }
+        
+        private async void Die()
+        {
+            _treeRunner.OnDie.Invoke();
+            
+            _deathParticle.Play();
+            _deathParticle.transform.parent = null;
+            
+            gameObject.SetActive(false);
+            
+            await Task.Delay(1500);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         private void RunTowardPlayer()

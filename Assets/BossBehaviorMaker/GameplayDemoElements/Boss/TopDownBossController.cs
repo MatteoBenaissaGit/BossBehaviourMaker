@@ -24,10 +24,13 @@ namespace BossBehaviorMaker.GameplayDemoElements.Boss
         [SerializeField] private float _punchAttackRadius;
         [SerializeField] private float _punchAttackCastTime;
         
+        [Header("Projectile attack Parameters") ,SerializeField] private Projectile _attackProjectile;
+        
         private int _life;
         private int _maxLife;
         private float _walkTowardPlayerTimer;
         private float _walkTowardPlayerSpeed;
+        private float _lookTowardPlayerTimer;
         private Camera _camera;
 
         private void Awake()
@@ -41,6 +44,7 @@ namespace BossBehaviorMaker.GameplayDemoElements.Boss
             _treeRunner.OnIdle += SetIdle;
             _treeRunner.OnAttackIndex += SetAttack;
             _treeRunner.OnWalkTowardPlayerForSecondsAtSpeed += SetWalkTowardPlayerForSeconds;
+            _treeRunner.OnLookTowardPlayerForSeconds += x => _lookTowardPlayerTimer = x;
         }
 
         private void Start()
@@ -53,14 +57,16 @@ namespace BossBehaviorMaker.GameplayDemoElements.Boss
             _canvas.forward = -_camera.transform.forward;
 
             RunTowardPlayer();
+            HandleLookTowardPlayer();
         }
 
         private void UpdateLife()
         {
+            _treeRunner.BossCurrentLife = _life;
+            
             float percentage = (float)_life / (float)_maxLife;
             _lifeBar.fillAmount = percentage;
             _lifeText.text = $"{_life} / {_maxLife}";
-            _treeRunner.BossCurrentLife = _life;
         }
 
         public void TakeDamageFrom(GameObject attacker, int damage)
@@ -82,11 +88,16 @@ namespace BossBehaviorMaker.GameplayDemoElements.Boss
             }
             
             _walkTowardPlayerTimer -= Time.deltaTime;
+            LookTowardPlayer();
+        }
+
+        private void LookTowardPlayer(float lookSpeedLerp = 0.1f)
+        {
             Vector3 direction = (_player.transform.position - transform.position).normalized;
             direction.y = 0;
             direction.Normalize();
             transform.position += direction * (_walkTowardPlayerSpeed * Time.deltaTime);
-            transform.forward = Vector3.Lerp(transform.forward, direction, 0.1f);
+            transform.forward = Vector3.Lerp(transform.forward, direction, lookSpeedLerp);
         }
 
         private void SetWalkTowardPlayerForSeconds(float seconds, float speed)
@@ -118,6 +129,10 @@ namespace BossBehaviorMaker.GameplayDemoElements.Boss
                 case 0:
                     _bossAnimator.SetTrigger("Attack1");
                     await Task.Delay((int)(_punchAttackCastTime * 1000));
+                    if (Application.isPlaying == false)
+                    {
+                        return;
+                    }
                     int hits = Physics.SphereCastNonAlloc(
                         transform.position + (transform.forward * _punchAttackDistance), 
                         _punchAttackRadius, 
@@ -132,9 +147,35 @@ namespace BossBehaviorMaker.GameplayDemoElements.Boss
                         }
                     }
                     break;
+                case 1:
+                    _bossAnimator.SetTrigger("Attack1");
+                    await Task.Delay(250);
+                    if (Application.isPlaying == false)
+                    {
+                        return;
+                    }
+                    for (int i = -1; i <= 1; i++)
+                    {
+                        Projectile projectile = Instantiate(_attackProjectile);
+                        projectile.transform.position = transform.position + transform.forward * 2;
+                        Vector3 direction = Quaternion.Euler(0, i * 15, 0) * transform.forward;
+                        projectile.Initialize(direction, gameObject, 0.65f);
+                    }
+                    break;
             }
         }
         
+        private void HandleLookTowardPlayer()
+{
+            if (_lookTowardPlayerTimer <= 0)
+            {
+                return;
+            }
+            
+            _lookTowardPlayerTimer -= Time.deltaTime;
+            LookTowardPlayer(0.05f);
+        }
+
 #if UNITY_EDITOR
 
         private void OnDrawGizmos()

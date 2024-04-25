@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BossBehaviorMaker.Scripts.Decorators
 {
-    public class RepeatDecoratorNodeBbm : DecoratorNodeBbm
+    public class Repeat : DecoratorNodeBbm
     {
         /// <summary>
         /// Set the number of times to repeat the child node.

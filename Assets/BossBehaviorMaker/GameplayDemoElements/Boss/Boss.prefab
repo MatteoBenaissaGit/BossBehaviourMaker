@@ -135,6 +135,7 @@ MonoBehaviour:
   _punchAttackDistance: 1.17
   _punchAttackRadius: 1.14
   _punchAttackCastTime: 0.5
+  _attackProjectile: {fileID: 784004272485323442, guid: eb00b63c7558b3d45b2ee2b80f78a333, type: 3}
 --- !u!114 &2439849031369645732
 MonoBehaviour:
   m_ObjectHideFlags: 0

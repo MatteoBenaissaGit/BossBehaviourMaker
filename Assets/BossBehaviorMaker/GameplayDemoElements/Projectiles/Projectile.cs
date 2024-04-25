@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace BossBehaviorMaker.GameplayDemoElements.Projectiles
 {
@@ -14,10 +15,12 @@ namespace BossBehaviorMaker.GameplayDemoElements.Projectiles
         
         private Vector3 _direction;
 
-        public void Initialize(Vector3 direction, GameObject sender)
+        public void Initialize(Vector3 direction, GameObject sender, float speedMultiplier = 1f)
         {
             Sender = sender;
             _direction = direction;
+
+            _speed *= speedMultiplier;
 
             transform.position = sender.transform.position + new Vector3(0, 0.5f, 0);
         }
@@ -34,14 +37,14 @@ namespace BossBehaviorMaker.GameplayDemoElements.Projectiles
             transform.position += movement;
         }
 
-        private void OnCollisionEnter(Collision collision)
+        private void OnTriggerEnter(Collider other)
         {
-            if (collision.gameObject == Sender)
+            if (other.gameObject == Sender || other.gameObject.GetComponent<Projectile>())
             {
                 return;
             }
 
-            if (collision.gameObject.TryGetComponent(out IAttackReceiver attackReceiver))
+            if (other.gameObject.TryGetComponent(out IAttackReceiver attackReceiver))
             {
                 attackReceiver.TakeDamageFrom(this.gameObject, _damage);
             }

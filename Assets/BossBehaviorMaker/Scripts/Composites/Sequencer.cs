@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace BossBehaviorMaker.Scripts.Composites
 {
-    public class SequencerCompositeNodeBbm : CompositeNodeBbm
+    public class Sequencer : CompositeNodeBbm
     {
         [field:SerializeField] public string SequenceName { get; set; }
         
@@ -13,7 +13,7 @@ namespace BossBehaviorMaker.Scripts.Composites
 
         public override string ToString()
         {
-            return $"{(SequenceName.Length <= 0 ? "Sequencer" : "Sequence : " + SequenceName)}";
+            return $"{((SequenceName == null || SequenceName.Length <= 0) ? "Sequencer" : "Sequence : " + SequenceName)}";
         }
 
         public override string NodeDescription()

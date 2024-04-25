@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace BossBehaviorMaker.Scripts.Actions
 {
-    public class GoBackToRootActionNodeBbm : ActionNodeBbm
+    public class GoBackToRoot : ActionNodeBbm
     {
         public override string ToString()
         {

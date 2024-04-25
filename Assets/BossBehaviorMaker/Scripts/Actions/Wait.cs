@@ -1,20 +1,22 @@
 ﻿using BossBehaviorMaker.Scripts.Runtime;
 using UnityEngine;
 
-namespace BossBehaviorMaker.Scripts.Composites
+namespace BossBehaviorMaker.Scripts.Actions
 {
-    public class SelectorCompositeNodeBbm : CompositeNodeBbm
+    public class Wait : ActionNodeBbm
     {
-        [field:SerializeField] public int NodeToRun { get; set; }
+        [field:SerializeField] public double Duration { get; set; }
+
+        private float _startTime;
 
         public override string ToString()
         {
-            return "Selector";
+            return $"Wait {Duration}s";
         }
 
         public override string NodeDescription()
         {
-            return "This node will run each child node in order until one of them succeeds.";
+            return "This node will wait for a set amount of time before continuing.";
         }
 
         protected override void OnStart()
@@ -28,16 +30,13 @@ namespace BossBehaviorMaker.Scripts.Composites
 
         protected override NodeBbmState OnUpdate()
         {
-            if (NodeToRun + 1 > Children.Count)
-            {
-                return NodeBbmState.Failure;
-            }
-            return Children[NodeToRun].Update();
+            return Time.time - _startTime > Duration ? NodeBbmState.Success : NodeBbmState.Running;
         }
 
         public override void Reset()
         {
             base.Reset();
+            _startTime = Time.time;
         }
     }
 }

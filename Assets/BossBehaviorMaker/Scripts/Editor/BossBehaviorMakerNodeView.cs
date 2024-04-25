@@ -1,4 +1,5 @@
-﻿using BossBehaviorMaker.Scripts.Runtime;
+﻿using BossBehaviorMaker.Scripts.Decorators;
+using BossBehaviorMaker.Scripts.Runtime;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -111,6 +112,11 @@ namespace BossBehaviorMaker.Scripts.Editor
                     color = new Color(0.32f, 1f, 0f, 0.25f);
                     style.backgroundColor = color;
                     elementTypeColor = new Color(color.r,color.g,color.b,1);
+                    break;
+                case IfBossLife :
+                    color = new Color(0.16f, 0.27f, 1f, 0.31f);
+                    style.backgroundColor = color;
+                    elementTypeColor = new Color(color.r,color.g,color.b,0.5f);
                     break;
                 case DecoratorNodeBbm :
                     color = new Color(1f, 0.45f, 0f, 0.25f);

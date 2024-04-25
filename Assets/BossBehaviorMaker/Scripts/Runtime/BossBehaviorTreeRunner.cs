@@ -19,6 +19,7 @@ namespace BossBehaviorMaker.Scripts.Runtime
         public Action OnIdle { get; set; }
         public Action<float, float> OnWalkTowardPlayerForSecondsAtSpeed { get; set; }
         public Action<int> OnAttackIndex { get; set; }
+        public Action<float> OnLookTowardPlayerForSeconds { get; set; }
         public Action OnDie { get; set; }
 
         // References to player and boss value, update them from your boss controller

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using BossBehaviorMaker.Scripts.Decorators;
 using BossBehaviorMaker.Scripts.Runtime;
@@ -80,10 +81,11 @@ namespace BossBehaviorMaker.Scripts.Editor
             miniMap.style.borderRightColor = borderColor;
             miniMap.style.borderBottomColor = borderColor;
             miniMap.style.borderTopColor = borderColor;
-            
+
             Add(miniMap);
         }
 
+        
         private void SetToolbarButtons()
         {
             Toolbar toolbar = new Toolbar
@@ -264,7 +266,7 @@ namespace BossBehaviorMaker.Scripts.Editor
             return nodeView;
         }
 
-        private void CreateNode(System.Type type)
+        private void CreateNode(System.Type type, ContextualMenuPopulateEvent evt)
         {
             if (_hasTree == false)
             {
@@ -277,6 +279,15 @@ namespace BossBehaviorMaker.Scripts.Editor
             
             _tree.Nodes.Add(node);
             BossBehaviorMakerNodeView nodeView = CreateNodeView(node);
+            
+            Vector3 screenMousePosition = evt.localMousePosition;
+            Vector2 worldMousePosition = screenMousePosition - contentViewContainer.transform.position;
+            worldMousePosition *= 1 / contentViewContainer.transform.scale.x;
+
+            float zoomMultiplier = 1f / 1f; //I can't get the zoom level from the graphview, it need to be applied here instead of the second "1f"
+            nodeView.SetPosition(new Rect(
+                worldMousePosition + new Vector2(250,250) * zoomMultiplier,
+                node.NodeGraphSize));
 
             if (_tree.RootNode == null)
             {
@@ -314,7 +325,7 @@ namespace BossBehaviorMaker.Scripts.Editor
             }
 
             TypeCache.TypeCollection types = TypeCache.GetTypesDerivedFrom<NodeBbm>();
-
+            
             foreach (Type type in types)
             {
                 if (type.IsAbstract)
@@ -322,7 +333,8 @@ namespace BossBehaviorMaker.Scripts.Editor
                     continue;
                 }
 
-                menuEvent.menu.AppendAction($"{type.BaseType.Name}/{type.Name}", _ => CreateNode(type));
+                
+                menuEvent.menu.AppendAction($"{type.BaseType.Name}/{type.Name}", _ => CreateNode(type, menuEvent));
             }
 
             base.BuildContextualMenu(menuEvent);

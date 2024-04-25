@@ -3,20 +3,18 @@ using UnityEngine;
 
 namespace BossBehaviorMaker.Scripts.Actions
 {
-    public class WaitActionNodeBbm : ActionNodeBbm
+    public class DebugLog : ActionNodeBbm
     {
-        [field:SerializeField] public double Duration { get; set; }
-
-        private float _startTime;
+        [field:SerializeField] public string Message { get; set; }
 
         public override string ToString()
         {
-            return $"Wait {Duration}s";
+            return $"Debug Log \"{(Message.Length >= 5 ? Message.Substring(0,5) + "..." : Message)}\"";
         }
 
         public override string NodeDescription()
         {
-            return "This node will wait for a set amount of time before continuing.";
+            return "This node will print a debug message to the console.";
         }
 
         protected override void OnStart()
@@ -30,13 +28,13 @@ namespace BossBehaviorMaker.Scripts.Actions
 
         protected override NodeBbmState OnUpdate()
         {
-            return Time.time - _startTime > Duration ? NodeBbmState.Success : NodeBbmState.Running;
+            Debug.Log($"{Message}");
+            return NodeBbmState.Success;
         }
 
         public override void Reset()
         {
             base.Reset();
-            _startTime = Time.time;
         }
     }
 }

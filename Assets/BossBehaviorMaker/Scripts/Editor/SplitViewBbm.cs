@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using BossBehaviorMaker.Scripts.Decorators;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
@@ -65,6 +66,17 @@ namespace BossBehaviorMaker.Scripts.Editor
                 {
                     PropertyInfo property = properties[i];
 
+                    //add a case for enums
+                    if (property.PropertyType.IsEnum)
+                    {
+                        EnumField enumField = new EnumField(property.Name, (Enum)property.GetValue(selectedNode.Node));
+                        enumField.value = (Enum)property.GetValue(selectedNode.Node);
+                        enumField.RegisterValueChangedCallback(evt => property.SetValueOptimized(selectedNode.Node, evt.newValue));
+                        enumField.RegisterValueChangedCallback(evt => SetNodeChanged(selectedNode));
+                        _inspectorPanel.Add(enumField);
+                        continue;
+                    }
+                    
                     switch (Type.GetTypeCode(property.PropertyType))
                     {
                         case TypeCode.Int32:

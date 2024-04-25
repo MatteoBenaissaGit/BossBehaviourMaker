@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace BossBehaviorMaker.Scripts.Actions
 {
-    public class WalkTowardPlayerActionNodeBbm : ActionNodeBbm
+    public class WalkTowardPlayer : ActionNodeBbm
     {
         [field:SerializeField] public double Duration { get; set; }
         [field:SerializeField] public double Speed { get; set; }

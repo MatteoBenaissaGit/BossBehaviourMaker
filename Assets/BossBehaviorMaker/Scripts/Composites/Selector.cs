@@ -1,20 +1,20 @@
 ﻿using BossBehaviorMaker.Scripts.Runtime;
 using UnityEngine;
 
-namespace BossBehaviorMaker.Scripts.Actions
+namespace BossBehaviorMaker.Scripts.Composites
 {
-    public class AttackActionNodeBbm : ActionNodeBbm
+    public class Selector : CompositeNodeBbm
     {
-        [field:SerializeField] public int AttackIndex { get; set; } 
-        
+        [field:SerializeField] public int NodeToRun { get; set; }
+
         public override string ToString()
         {
-            return $"Attack (index:{AttackIndex})";
+            return "Selector";
         }
 
         public override string NodeDescription()
         {
-            return "This node will launch the attack event with the set attack index parameter";
+            return "This node will run each child node in order until one of them succeeds.";
         }
 
         protected override void OnStart()
@@ -28,8 +28,11 @@ namespace BossBehaviorMaker.Scripts.Actions
 
         protected override NodeBbmState OnUpdate()
         {
-            m_tree.Runner.OnAttackIndex?.Invoke(AttackIndex);
-            return NodeBbmState.Success;
+            if (NodeToRun + 1 > Children.Count)
+            {
+                return NodeBbmState.Failure;
+            }
+            return Children[NodeToRun].Update();
         }
 
         public override void Reset()
